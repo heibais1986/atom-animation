@@ -1,0 +1,9 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  /* Ciemniejszy wariant Propozycji 2 */
+  background-color: #111827;
+  background-image: radial-gradient(ellipse at center, #1d2733 0%, #111827 75%);
+}
