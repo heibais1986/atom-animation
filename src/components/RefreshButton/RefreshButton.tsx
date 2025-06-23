@@ -1,5 +1,5 @@
 import React from "react";
-import { RefreshIcon } from "@/app/assets/icons/RefreshIcon";
+import { RefreshIcon } from "@/assets/icons/RefreshIcon";
 import styles from "./RefreshButton.module.css";
 
 type RefreshButtonProps = {
