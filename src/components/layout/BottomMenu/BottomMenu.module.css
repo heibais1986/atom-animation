@@ -1,0 +1,293 @@
+/* src/components/layout/BottomMenu/BottomMenu.module.scss */
+.bottomMenu {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+  min-width: fit-content;
+  height: 9rem;
+}
+
+.rightPanel {
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.4s ease;
+  position: relative;
+  backdrop-filter: blur(15px);
+  height: 100%;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 0.3rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  transition: all 0.3s ease;
+}
+
+.legendItem:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+.colorIndicator {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  border: 0px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: all 0.3s ease;
+}
+
+.colorIndicator:hover {
+  transform: scale(1.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.rightPanel label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  color: rgba(248, 250, 252, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.025em;
+}
+
+.rightPanel input[type="range"] {
+  --slider-fill-percentage: 50%;
+  --track-bg: #1e293b;
+  --fill-bg: linear-gradient(90deg, #2fb7c9, #165263);
+  --thumb-size: 18px;
+  --thumb-bg: #f0f9ff;
+  --thumb-glow-color: #38bdf8;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 160px;
+  height: var(--thumb-size);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.rightPanel input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(
+    to right,
+    var(--fill-bg) var(--slider-fill-percentage),
+    var(--track-bg) var(--slider-fill-percentage)
+  );
+  border-radius: 3px;
+  transition: background 0.1s ease;
+}
+
+.rightPanel input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: var(--track-bg);
+  border-radius: 3px;
+}
+
+.rightPanel input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.8rem;
+  height: 0.8rem;
+  background: #3bc3e2;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 0 4px #3bc3e2;
+  margin-top: -6px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.rightPanel input[type="range"]::-moz-range-thumb {
+  width: 0.8rem;
+  height: 0.8rem;
+  background: #3bc3e2;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 0 4px #3bc3e2;
+}
+
+.rightPanel input[type="range"]::-moz-range-progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--fill-bg);
+}
+
+.rightPanel input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 5px #3bc3e2;
+}
+.rightPanel input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px #3bc3e2;
+}
+
+.elementDisplayWrapper {
+  width: 160px;
+  height: 100%;
+  position: relative;
+  transition: width 0.4s ease;
+}
+
+.elementDisplay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  backdrop-filter: blur(15px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto auto;
+  grid-template-areas:
+    "number config"
+    "symbol symbol"
+    "name   name"
+    "weight weight";
+  align-items: center;
+  overflow: hidden;
+}
+
+.wideDisplay {
+  width: calc(100% + 1rem);
+}
+
+.atomicNumber {
+  grid-area: number;
+  justify-self: start;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #3bc3e2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.electronConfiguration {
+  grid-area: config;
+  justify-self: end;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(148, 163, 184, 0.8);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.elementSymbol {
+  grid-area: symbol;
+  justify-self: center;
+  align-self: center;
+  font-size: 2.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+  line-height: 1;
+  background-color: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.elementName {
+  grid-area: name;
+  justify-self: center;
+  align-self: end;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(248, 250, 252, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.025em;
+}
+
+.atomicWeight {
+  grid-area: weight;
+  justify-self: center;
+  align-self: start;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(148, 163, 184, 0.8);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  margin-top: 4px;
+}
+
+@media (max-width: 1200px) {
+  .secondRow {
+    flex-direction: column;
+    gap: 1.5rem;
+    bottom: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .controlsRow {
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+  .legend {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+  .elementDisplayWrapper {
+    width: 140px;
+  }
+  .elementSymbol {
+    font-size: 2.8rem;
+  }
+  .rightPanel input[type="range"] {
+    width: 160px;
+  }
+}

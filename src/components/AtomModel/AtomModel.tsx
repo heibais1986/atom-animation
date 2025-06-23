@@ -264,7 +264,7 @@ export const AtomModel = () => {
     };
   }, []);
 
-  const handleContextMenu = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (clickStartPos.current) {
       const dist = Math.sqrt(
@@ -278,7 +278,7 @@ export const AtomModel = () => {
     clickStartPos.current = null;
   };
 
-  const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.button === 2) {
       clickStartPos.current = { x: e.clientX, y: e.clientY };
     }
