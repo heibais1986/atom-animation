@@ -216,6 +216,30 @@ export const AtomModel = () => {
   const isSelectFocused = useRef(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const speedSliderRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const updateSliderFill = () => {
+      const slider = speedSliderRef.current;
+      if (slider) {
+        const min = Number(slider.min);
+        const max = Number(slider.max);
+        const value = Number(slider.value);
+        const percentage = ((value - min) / (max - min)) * 100;
+        slider.style.setProperty("--slider-fill-percentage", `${percentage}%`);
+      }
+    };
+
+    updateSliderFill();
+
+    const slider = speedSliderRef.current;
+    slider?.addEventListener("input", updateSliderFill);
+
+    return () => {
+      slider?.removeEventListener("input", updateSliderFill);
+    };
+  }, [sliderValue]);
+
   useEffect(() => {
     const handleKey = (event: KeyboardEvent, isDown: boolean) => {
       if (
@@ -399,7 +423,8 @@ export const AtomModel = () => {
     });
   }, [element]);
   const electronCount = element.shells.reduce((a, b) => a + b, 0);
-  const massNumber = element.protons + element.neutrons;
+
+  const isLongConfig = element.electronConfiguration.split(" ").length >= 5;
 
   return (
     <div className={styles.mainContainer} onPointerDown={handlePointerDown}>
@@ -444,11 +469,20 @@ export const AtomModel = () => {
         </Canvas>
       </div>
       <div className={styles.secondRow}>
-        <div className={styles.elementDisplay}>
-          <div className={styles.atomicNumber}>{element.protons}</div>
-          <div className={styles.elementSymbol}>{element.symbol}</div>
-          <div className={styles.elementName}>{element.name}</div>
-          <div className={styles.atomicMass}>{massNumber}</div>
+        <div className={styles.elementDisplayWrapper}>
+          <div
+            className={`${styles.elementDisplay} ${
+              isLongConfig ? styles.wideDisplay : ""
+            }`}
+          >
+            <div className={styles.atomicNumber}>{element.protons}</div>
+            <div className={styles.electronConfiguration}>
+              {element.electronConfiguration}
+            </div>
+            <div className={styles.elementSymbol}>{element.symbol}</div>
+            <div className={styles.elementName}>{element.name}</div>
+            <div className={styles.atomicWeight}>{element.atomicWeight}</div>
+          </div>
         </div>
         <div className={styles.rightPanel}>
           <div className={styles.controlsRow}>
@@ -486,11 +520,12 @@ export const AtomModel = () => {
                 &#9660;
               </button>
             </div>
-            <div className={styles.controlGroup}>
+            <div className={styles.controlGroup} id="speed-control-group">
               <label htmlFor="speed">Speed:</label>
               <input
                 id="speed"
                 type="range"
+                ref={speedSliderRef}
                 min={1}
                 max={100}
                 value={sliderValue}
