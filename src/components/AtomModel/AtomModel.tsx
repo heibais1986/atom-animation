@@ -1,23 +1,14 @@
+// src/components/AtomModel/AtomModel.tsx
 "use client";
 
-import React, { useRef, useMemo, useState, useEffect } from "react";
+import React, { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 import styles from "./AtomModel.module.css";
-import { useAtomModel } from "./useAtomModel";
-import { ElementInfoPanel } from "./ElementInfoPanel";
-import { RefreshButton } from "../RefreshButton/RefreshButton";
-import { ElementSelect } from "./ElementSelect/ElementSelect";
-import {
-  DndContext,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent,
-} from "@dnd-kit/core";
+import { useAppStore, useCurrentElement } from "../../store/appStore";
 
 const KeyboardRotator = ({
   modelGroupRef,
@@ -50,7 +41,7 @@ const KeyboardRotator = ({
   return null;
 };
 
-const CONFIG = {
+export const CONFIG = {
   modelScale: 1.35,
   initialRotation: new THREE.Euler(Math.PI / 4, Math.PI / 0.6, 0),
   cameraPosition: new THREE.Vector3(0, 5.6, 16.8),
@@ -205,8 +196,9 @@ const OrbitRing = ({ radius }: { radius: number }) => (
 );
 
 export const AtomModel = () => {
-  const { elements, element, sliderValue, setSliderValue, setSelectedElement } =
-    useAtomModel();
+  const element = useCurrentElement();
+  const { sliderValue, refreshCounter, showInfoPanel } = useAppStore();
+  const isSelectFocused = useRef(false);
 
   const modelGroupRef = useRef<THREE.Group>(null!);
   const controlsRef = useRef<OrbitControlsImpl>(null!);
@@ -216,29 +208,22 @@ export const AtomModel = () => {
     left: false,
     right: false,
   });
-  const isSelectFocused = useRef(false);
-  const speedSliderRef = useRef<HTMLInputElement>(null);
+  const clickStartPos = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    const updateSliderFill = () => {
-      const slider = speedSliderRef.current;
-      if (slider) {
-        const min = Number(slider.min);
-        const max = Number(slider.max);
-        const value = Number(slider.value);
-        const percentage = ((value - min) / (max - min)) * 100;
-        slider.style.setProperty("--slider-fill-percentage", `${percentage}%`);
+    if (refreshCounter > 0) {
+      if (modelGroupRef.current) {
+        modelGroupRef.current.rotation.set(
+          CONFIG.initialRotation.x,
+          CONFIG.initialRotation.y,
+          CONFIG.initialRotation.z
+        );
       }
-    };
-
-    updateSliderFill();
-    const slider = speedSliderRef.current;
-    slider?.addEventListener("input", updateSliderFill);
-
-    return () => {
-      slider?.removeEventListener("input", updateSliderFill);
-    };
-  }, [sliderValue]);
+      if (controlsRef.current) {
+        controlsRef.current.reset();
+      }
+    }
+  }, [refreshCounter]);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent, isDown: boolean) => {
@@ -248,7 +233,6 @@ export const AtomModel = () => {
       ) {
         return;
       }
-
       switch (event.key) {
         case "ArrowUp":
           event.preventDefault();
@@ -270,31 +254,17 @@ export const AtomModel = () => {
           return;
       }
     };
-
     const handleKeyDown = (e: KeyboardEvent) => handleKey(e, true);
     const handleKeyUp = (e: KeyboardEvent) => handleKey(e, false);
-
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
-
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
 
-  const [isPanelVisible, setIsPanelVisible] = useState(false);
-  const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
-  const clickStartPos = useRef<{ x: number; y: number } | null>(null);
-  const clickOutsideTracker = useRef<{ x: number; y: number } | null>(null);
-
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.button === 2) {
-      clickStartPos.current = { x: e.clientX, y: e.clientY };
-    }
-  };
-
-  const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleContextMenu = (e: React.MouseEvent<HTMLCanvasElement>) => {
     e.preventDefault();
     if (clickStartPos.current) {
       const dist = Math.sqrt(
@@ -302,71 +272,16 @@ export const AtomModel = () => {
           (e.clientY - clickStartPos.current.y) ** 2
       );
       if (dist < 5) {
-        setPanelPosition({ x: e.clientX, y: e.clientY });
-        setIsPanelVisible(true);
+        showInfoPanel({ x: e.clientX, y: e.clientY });
       }
     }
     clickStartPos.current = null;
   };
 
-  useEffect(() => {
-    if (!isPanelVisible) return;
-    const handleMouseDown = (e: MouseEvent) => {
-      if (e.button !== 0) return;
-      const target = e.target as HTMLElement;
-      const onInfoPanel = target.closest('[class*="ElementInfoPanel_panel"]');
-      const onControlsPanel = target.closest(`.${styles.secondRow}`);
-      if (!onInfoPanel && !onControlsPanel) {
-        clickOutsideTracker.current = { x: e.clientX, y: e.clientY };
-      }
-    };
-    const handleMouseUp = (e: MouseEvent) => {
-      if (e.button !== 0) return;
-      if (clickOutsideTracker.current) {
-        const dist = Math.sqrt(
-          (e.clientX - clickOutsideTracker.current.x) ** 2 +
-            (e.clientY - clickOutsideTracker.current.y) ** 2
-        );
-        if (dist < 5) setIsPanelVisible(false);
-      }
-      clickOutsideTracker.current = null;
-    };
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      window.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isPanelVisible]);
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 10,
-      },
-    })
-  );
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { delta } = event;
-    setPanelPosition((prev) => ({
-      x: prev.x + delta.x,
-      y: prev.y + delta.y,
-    }));
-  };
-
-  const handleRefresh = () => {
-    if (modelGroupRef.current) {
-      modelGroupRef.current.rotation.set(
-        CONFIG.initialRotation.x,
-        CONFIG.initialRotation.y,
-        CONFIG.initialRotation.z
-      );
+  const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (e.button === 2) {
+      clickStartPos.current = { x: e.clientX, y: e.clientY };
     }
-    if (controlsRef.current) {
-      controlsRef.current.reset();
-    }
-    setIsPanelVisible(false);
   };
 
   const speedMultiplier = (sliderValue / CONFIG.sliderMidpoint) ** 2;
@@ -376,7 +291,7 @@ export const AtomModel = () => {
   );
   const orientations = useMemo(() => {
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-    return element.shells.map((_, idx) => {
+    return element.shells.map((_: number, idx: number) => {
       if (idx === 0) return new THREE.Euler(Math.PI / 2, 0, 0);
       if (idx === 1) return new THREE.Euler(0, 0, 0);
       if (idx === 2) return new THREE.Euler(Math.PI / 4, Math.PI / 4, 0);
@@ -384,120 +299,46 @@ export const AtomModel = () => {
       return new THREE.Euler(angle, angle * 0.5, angle * 0.25);
     });
   }, [element]);
-  const electronCount = element.shells.reduce((a, b) => a + b, 0);
-
-  const isLongConfig = element.electronConfiguration.split(" ").length >= 5;
 
   return (
-    <div className={styles.mainContainer} onPointerDown={handlePointerDown}>
-      <RefreshButton onClick={handleRefresh} />
-
-      <div className={styles.animationContainer}>
-        <Canvas
-          onContextMenu={handleContextMenu}
-          gl={{ alpha: true }}
-          style={{ background: "transparent" }}
-          camera={{ position: CONFIG.cameraPosition, fov: CONFIG.cameraFov }}
-        >
-          <ambientLight intensity={CONFIG.ambientLightIntensity} />
-          <directionalLight
-            position={CONFIG.directionalLightPosition.toArray()}
-            intensity={CONFIG.directionalLightIntensity}
-          />
-          <group ref={modelGroupRef} rotation={CONFIG.initialRotation}>
-            <Nucleus protons={element.protons} neutrons={element.neutrons} />
-            {element.shells.map((count, idx) => {
-              const speed =
-                CONFIG.speedConstant * speedMultiplier * (1 / (idx + 1));
-              return (
-                <group key={idx} rotation={orientations[idx]}>
-                  <OrbitRing radius={shellDistances[idx]} />
-                  {Array.from({ length: count }).map((_, i) => (
-                    <Electron
-                      key={i}
-                      radius={shellDistances[idx]}
-                      speed={speed}
-                    />
-                  ))}
-                </group>
-              );
-            })}
-          </group>
-          <OrbitControls ref={controlsRef} enableZoom enablePan />
-          <KeyboardRotator
-            modelGroupRef={modelGroupRef}
-            rotationState={rotationState}
-          />
-        </Canvas>
-      </div>
-      <div className={styles.secondRow}>
-        <div className={styles.elementDisplayWrapper}>
-          <div
-            className={`${styles.elementDisplay} ${
-              isLongConfig ? styles.wideDisplay : ""
-            }`}
-          >
-            <div className={styles.atomicNumber}>{element.protons}</div>
-            <div className={styles.electronConfiguration}>
-              {element.electronConfiguration}
-            </div>
-            <div className={styles.elementSymbol}>{element.symbol}</div>
-            <div className={styles.elementName}>{element.name}</div>
-            <div className={styles.atomicWeight}>{element.atomicWeight}</div>
-          </div>
-        </div>
-        <div className={styles.rightPanel}>
-          <div className={styles.controlsRow}>
-            <ElementSelect
-              elements={elements}
-              selectedElementName={element.name}
-              setSelectedElement={setSelectedElement}
-              isSelectFocused={isSelectFocused}
-            />
-            <div className={styles.controlGroup} id="speed-control-group">
-              <label htmlFor="speed">Speed:</label>
-              <input
-                id="speed"
-                type="range"
-                ref={speedSliderRef}
-                min={1}
-                max={100}
-                value={sliderValue}
-                onChange={(e) => setSliderValue(Number(e.target.value))}
-              />
-            </div>
-          </div>
-          <div className={styles.legend}>
-            <div className={styles.legendItem}>
-              <div
-                className={styles.colorIndicator}
-                style={{ backgroundColor: CONFIG.protonColor }}
-              />
-              <span>{`Protons (${element.protons})`}</span>
-            </div>
-            <div className={styles.legendItem}>
-              <div
-                className={styles.colorIndicator}
-                style={{ backgroundColor: CONFIG.neutronColor }}
-              />
-              <span>{`Neutrons (${element.neutrons})`}</span>
-            </div>
-            <div className={styles.legendItem}>
-              <div
-                className={styles.colorIndicator}
-                style={{ backgroundColor: CONFIG.electronColor }}
-              />
-              <span>{`Electrons (${electronCount})`}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        {isPanelVisible && (
-          <ElementInfoPanel element={element} position={panelPosition} />
-        )}
-      </DndContext>
+    <div className={styles.animationContainer}>
+      <Canvas
+        onContextMenu={handleContextMenu}
+        onPointerDown={handlePointerDown}
+        gl={{ alpha: true }}
+        style={{ background: "transparent" }}
+        camera={{ position: CONFIG.cameraPosition, fov: CONFIG.cameraFov }}
+      >
+        <ambientLight intensity={CONFIG.ambientLightIntensity} />
+        <directionalLight
+          position={CONFIG.directionalLightPosition.toArray()}
+          intensity={CONFIG.directionalLightIntensity}
+        />
+        <group ref={modelGroupRef} rotation={CONFIG.initialRotation}>
+          <Nucleus protons={element.protons} neutrons={element.neutrons} />
+          {element.shells.map((count: number, idx: number) => {
+            const speed =
+              CONFIG.speedConstant * speedMultiplier * (1 / (idx + 1));
+            return (
+              <group key={idx} rotation={orientations[idx]}>
+                <OrbitRing radius={shellDistances[idx]} />
+                {Array.from({ length: count }).map((_, i: number) => (
+                  <Electron
+                    key={i}
+                    radius={shellDistances[idx]}
+                    speed={speed}
+                  />
+                ))}
+              </group>
+            );
+          })}
+        </group>
+        <OrbitControls ref={controlsRef} enableZoom enablePan />
+        <KeyboardRotator
+          modelGroupRef={modelGroupRef}
+          rotationState={rotationState}
+        />
+      </Canvas>
     </div>
   );
 };

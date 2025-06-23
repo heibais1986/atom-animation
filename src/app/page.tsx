@@ -1,3 +1,5 @@
+"use client";
+
 import { AtomModel } from "../components/AtomModel/AtomModel";
 import styles from "./page.module.css";
 
