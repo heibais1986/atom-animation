@@ -12,6 +12,17 @@ type ElementInfoPanelProps = {
   position: { x: number; y: number };
 };
 
+const formatValue = (
+  value: number | string | undefined | null,
+  unit: string = ""
+) => {
+  if (value === undefined || value === null) return "N/A";
+  if (typeof value === "number") {
+    return `${value.toLocaleString()} ${unit}`.trim();
+  }
+  return `${value} ${unit}`.trim();
+};
+
 export const ElementInfoPanel = ({
   element,
   position,
@@ -37,16 +48,66 @@ export const ElementInfoPanel = ({
       ref={setNodeRef}
       className={styles.panel}
       style={style}
-      onMouseDown={(e) => e.stopPropagation()}
+      onMouseDown={(e) => {
+        if (!(e.target as HTMLElement).closest(`.${styles.header}`)) {
+          e.stopPropagation();
+        }
+      }}
     >
       <div className={styles.header} {...listeners} {...attributes}>
         <h3 className={styles.title}>{element.title}</h3>
       </div>
       <div className={styles.content}>
-        <p>{element.description}</p>
-        <div className={styles.stats}>
-          <span>Liczba atomowa: {element.protons}</span>
-          <span>Powłoki elektronowe: {element.shells.join(", ")}</span>
+        <p className={styles.description}>{element.description}</p>
+        <div className={styles.divider}></div>
+        <div className={styles.propertiesGrid}>
+          {/* Row 1 */}
+          <div className={styles.property}>
+            <span className={styles.label}>ATOMIC NO.</span>
+            <span className={styles.value}>{element.protons}</span>
+          </div>
+          <div className={styles.property}>
+            <span className={styles.label}>ATOMIC MASS</span>
+            <span className={styles.value}>
+              {formatValue(element.atomicWeight, "u")}
+            </span>
+          </div>
+          <div className={styles.property}>
+            <span className={styles.label}>GROUP</span>
+            <span className={styles.value}>
+              {element.group > 0 ? element.group : "N/A"}
+            </span>
+          </div>
+          <div className={styles.property}>
+            <span className={styles.label}>PERIOD</span>
+            <span className={styles.value}>{element.period}</span>
+          </div>
+
+          {/* Row 2 */}
+          <div className={`${styles.property} ${styles.fullRow}`}>
+            <span className={styles.label}>E. CONFIGURATION</span>
+            <span className={styles.value}>
+              {element.electronConfiguration}
+            </span>
+          </div>
+
+          {/* Row 3 */}
+          <div className={styles.property}>
+            <span className={styles.label}>STATE (STP)</span>
+            <span className={styles.value}>{element.stateAtSTP}</span>
+          </div>
+          <div className={styles.property}>
+            <span className={styles.label}>MELTING PT.</span>
+            <span className={styles.value}>
+              {formatValue(element.meltingPointK, "K")}
+            </span>
+          </div>
+          <div className={styles.property}>
+            <span className={styles.label}>BOILING PT.</span>
+            <span className={styles.value}>
+              {formatValue(element.boilingPointK, "K")}
+            </span>
+          </div>
         </div>
       </div>
     </div>

@@ -8,6 +8,11 @@ export type ElementConfig = {
   electronConfiguration: string;
   title: string;
   description: string;
+  group: number;
+  period: number;
+  stateAtSTP: string;
+  meltingPointK: number | null;
+  boilingPointK: number | null;
 };
 
 export const elements: ElementConfig[] = [
@@ -21,7 +26,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "1s¹",
     title: "Hydrogen (H) - The Simplest Element",
     description:
-      "Hydrogen is the simplest and most abundant element in the universe, making up about 75% of its mass. It's a key component of water and all organic matter. Under standard conditions, it's a colorless, odorless, and flammable gas.",
+      "Hydrogen is the simplest and most abundant element in the universe, making up about 75% of its mass. It's a key component of water, all organic matter, and stars, where it fuels nuclear fusion through the proton-proton chain. Under standard conditions, it's a colorless, odorless, and highly flammable diatomic gas. Its unique properties and potential as a clean energy source make it a subject of intense research.",
+    group: 1,
+    period: 1,
+    stateAtSTP: "Gas",
+    meltingPointK: 13.99,
+    boilingPointK: 20.271,
   },
   {
     name: "Helium",
@@ -33,7 +43,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "1s²",
     title: "Helium (He) - The Noble Gas",
     description:
-      "Helium is the second-lightest element. It's a noble gas, meaning it is chemically inert. Famously used to fill balloons and airships, it is also crucial in cryogenics for cooling superconducting magnets, such as in MRI scanners.",
+      "Helium is the second-lightest and second most abundant element in the universe. It's a noble gas, meaning it is chemically inert and forms almost no compounds. Famously used to fill balloons and airships due to its low density, it is also crucial in cryogenics for cooling superconducting magnets, such as in MRI scanners and particle accelerators. Most terrestrial helium is a product of radioactive decay.",
+    group: 18,
+    period: 1,
+    stateAtSTP: "Gas",
+    meltingPointK: null,
+    boilingPointK: 4.22,
   },
   {
     name: "Lithium",
@@ -45,7 +60,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[He] 2s¹",
     title: "Lithium (Li) - The Lightest Metal",
     description:
-      "Lithium is a soft, silvery-white alkali metal. It is the lightest metal and the least dense solid element. Highly reactive and flammable, it is primarily used in rechargeable batteries for mobile phones, laptops, and electric vehicles.",
+      "Lithium is a soft, silvery-white alkali metal. It is the lightest metal and the least dense solid element, so light it can float on oil. Highly reactive and flammable, it is primarily used in rechargeable batteries that power everything from mobile phones and laptops to electric vehicles. It's also used in high-temperature lubricants and mood-stabilizing medications.",
+    group: 1,
+    period: 2,
+    stateAtSTP: "Solid",
+    meltingPointK: 453.65,
+    boilingPointK: 1615,
   },
   {
     name: "Beryllium",
@@ -57,7 +77,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[He] 2s²",
     title: "Beryllium (Be) - The Gemstone Metal",
     description:
-      "Beryllium is a relatively rare, lightweight, and strong steel-gray metal. It enhances the properties of many alloys and is used in aerospace, defense, and medical applications. It is found in gemstones like beryl (aquamarine, emerald).",
+      "Beryllium is a relatively rare, lightweight, and exceptionally strong steel-gray metal. It enhances the properties of many alloys, especially with copper, and is used in demanding aerospace, defense, and medical applications like X-ray windows. It is found in precious gemstones like beryl (aquamarine, emerald), which gives it its name. Beryllium dust is toxic if inhaled.",
+    group: 2,
+    period: 2,
+    stateAtSTP: "Solid",
+    meltingPointK: 1560,
+    boilingPointK: 2742,
   },
   {
     name: "Boron",
@@ -69,7 +94,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[He] 2s² 2p¹",
     title: "Boron (B) - The Versatile Metalloid",
     description:
-      "Boron is a metalloid with several forms, the most common being amorphous boron, a dark powder. It's known for its hardness and is used in fiberglass, heat-resistant glass (borosilicate), and as a dopant in the semiconductor industry.",
+      "Boron is a metalloid with several forms, the most common being amorphous boron, a dark powder, and crystalline boron, which is extremely hard. It's known for its exceptional hardness, second only to diamond, and is used to create durable fiberglass, heat-resistant borosilicate glass, and super-hard materials like boron carbide. It also serves as a crucial dopant in the semiconductor industry.",
+    group: 13,
+    period: 2,
+    stateAtSTP: "Solid",
+    meltingPointK: 2349,
+    boilingPointK: 4200,
   },
   {
     name: "Carbon",
@@ -81,7 +111,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[He] 2s² 2p²",
     title: "Carbon (C) - The Backbone of Life",
     description:
-      "Carbon is the chemical basis for all known life. It can form a vast number of compounds, more than any other element. Its most famous allotropes are diamond, the hardest natural substance, and graphite, used in pencils and lubricants.",
+      "Carbon is the chemical basis for all known life, capable of forming a vast number of complex and stable compounds, more than any other element. Its most famous allotropes are diamond, the hardest natural substance, and graphite, a soft material used in pencils and lubricants. Newer forms like graphene and carbon nanotubes hold promise for future technologies in electronics and materials science.",
+    group: 14,
+    period: 2,
+    stateAtSTP: "Solid",
+    meltingPointK: 3823,
+    boilingPointK: 5100,
   },
   {
     name: "Nitrogen",
@@ -93,7 +128,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[He] 2s² 2p³",
     title: "Nitrogen (N) - The Atmospheric Giant",
     description:
-      "Nitrogen makes up about 78% of Earth's atmosphere. As a component of proteins and nucleic acids, it is essential for all living organisms. In liquid form, it's a powerful cryogen, and it's a key ingredient in fertilizers.",
+      "Nitrogen makes up about 78% of Earth's atmosphere as a very stable diatomic molecule (N₂). As a component of proteins and nucleic acids (DNA/RNA), it is absolutely essential for all living organisms. In liquid form, it's a powerful cryogen used for freezing biological samples. Its most significant commercial use is in the production of ammonia for fertilizers via the Haber-Bosch process.",
+    group: 15,
+    period: 2,
+    stateAtSTP: "Gas",
+    meltingPointK: 63.15,
+    boilingPointK: 77.36,
   },
   {
     name: "Oxygen",
@@ -105,7 +145,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[He] 2s² 2p⁴",
     title: "Oxygen (O) - The Breath of Life",
     description:
-      "Oxygen is a highly reactive nonmetal essential for respiration in most terrestrial life. It is the third most abundant element in the universe and the most abundant by mass in the Earth's crust, mainly in oxides.",
+      "Oxygen is a highly reactive nonmetal essential for aerobic respiration in most terrestrial life and for combustion. It is the third most abundant element in the universe by mass and the most abundant by mass in the Earth's crust, mainly found in oxides and silicates. Its allotrope, ozone (O₃), forms a crucial layer in the stratosphere that protects Earth from ultraviolet radiation.",
+    group: 16,
+    period: 2,
+    stateAtSTP: "Gas",
+    meltingPointK: 54.36,
+    boilingPointK: 90.188,
   },
   {
     name: "Fluorine",
@@ -117,7 +162,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[He] 2s² 2p⁵",
     title: "Fluorine (F) - The Most Electronegative Element",
     description:
-      "Fluorine is a pale yellow, highly corrosive gas. It is the most electronegative and reactive of all elements. It's a key component of many plastics, such as Teflon, and is added to toothpaste and water supplies to prevent tooth decay.",
+      "Fluorine is a pale yellow, highly corrosive gas, existing as a diatomic molecule (F₂). It is the most electronegative and reactive of all elements, capable of forming compounds with noble gases. It's a key component of many plastics, such as Teflon, and is widely added as fluoride to toothpaste and public water supplies to prevent tooth decay. Handling pure fluorine is extremely dangerous.",
+    group: 17,
+    period: 2,
+    stateAtSTP: "Gas",
+    meltingPointK: 53.53,
+    boilingPointK: 85.03,
   },
   {
     name: "Neon",
@@ -129,7 +179,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[He] 2s² 2p⁶",
     title: "Neon (Ne) - The Glowing Sign",
     description:
-      "Neon is a noble gas that is colorless under standard conditions. When an electric current is passed through it, it emits a brilliant reddish-orange glow, which is famously used in advertising signs. It is chemically inert.",
+      "Neon is a noble gas that is colorless, odorless, and chemically inert under standard conditions. When an electric current is passed through it, it emits a brilliant reddish-orange glow, which is famously used in advertising signs and high-voltage indicators. Despite its iconic association with lighting, it is relatively rare on Earth, extracted from air through fractional distillation.",
+    group: 18,
+    period: 2,
+    stateAtSTP: "Gas",
+    meltingPointK: 24.56,
+    boilingPointK: 27.07,
   },
   {
     name: "Sodium",
@@ -141,7 +196,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ne] 3s¹",
     title: "Sodium (Na) - The Salty Metal",
     description:
-      "Sodium is a soft, silvery-white, highly reactive alkali metal. It is essential for animal life, regulating blood volume and pressure. Its most common compound is sodium chloride (table salt). It's also used in streetlights and as a heat transfer agent.",
+      "Sodium is a soft, silvery-white, highly reactive alkali metal that tarnishes instantly in air and reacts violently with water. It is essential for animal life, with the sodium-potassium pump being vital for nerve cell function. Its most common compound is sodium chloride (table salt). It's also used in sodium-vapor lamps for efficient streetlights and as a heat transfer agent in some nuclear reactors.",
+    group: 1,
+    period: 3,
+    stateAtSTP: "Solid",
+    meltingPointK: 370.944,
+    boilingPointK: 1156.09,
   },
   {
     name: "Magnesium",
@@ -153,7 +213,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ne] 3s²",
     title: "Magnesium (Mg) - The Lightweight Strength",
     description:
-      "Magnesium is a shiny gray solid and the eighth-most-abundant element in the Earth's crust. It is strong but lightweight, making it ideal for alloys used in cars, aircraft, and electronics. It is also essential for all living cells.",
+      "Magnesium is a shiny gray solid and the eighth-most-abundant element in the Earth's crust. It is remarkably strong but lightweight, making it ideal for creating alloys used in cars, aircraft, and consumer electronics. It is also essential for all living cells, playing a central role in chlorophyll, the molecule that allows plants to perform photosynthesis. It burns with a brilliant white light.",
+    group: 2,
+    period: 3,
+    stateAtSTP: "Solid",
+    meltingPointK: 923,
+    boilingPointK: 1363,
   },
   {
     name: "Aluminum",
@@ -165,7 +230,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ne] 3s² 3p¹",
     title: "Aluminum (Al) - The Everyday Metal",
     description:
-      "Aluminum is a silvery-white, lightweight metal. It is not found free in nature but is the most abundant metal in the Earth's crust. Its resistance to corrosion and low density make it vital for transportation, packaging (cans), and construction.",
+      "Aluminum is a silvery-white, lightweight, and non-magnetic metal. It is not found free in nature but is the most abundant metal in the Earth's crust. Its excellent resistance to corrosion, due to a passivating oxide layer, and its low density make it a vital material for transportation (aircraft, automobiles), packaging (cans, foil), and construction (window frames).",
+    group: 13,
+    period: 3,
+    stateAtSTP: "Solid",
+    meltingPointK: 933.47,
+    boilingPointK: 2792,
   },
   {
     name: "Silicon",
@@ -177,7 +247,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ne] 3s² 3p²",
     title: "Silicon (Si) - The Digital Age Foundation",
     description:
-      "Silicon is a hard, brittle crystalline solid with a blue-gray metallic luster. It is the second most abundant element in the Earth's crust (after oxygen). As a semiconductor, it is the fundamental component of most electronics, including computer chips.",
+      "Silicon is a hard, brittle crystalline solid with a blue-gray metallic luster. It is the second most abundant element in the Earth's crust (after oxygen), mainly found in silicate minerals. As a semiconductor, it is the fundamental component of most modern electronics, including computer chips, transistors, and solar cells. It is also the basis for silicone polymers.",
+    group: 14,
+    period: 3,
+    stateAtSTP: "Solid",
+    meltingPointK: 1687,
+    boilingPointK: 3538,
   },
   {
     name: "Phosphorus",
@@ -189,7 +264,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ne] 3s² 3p³",
     title: "Phosphorus (P) - The Bearer of Light",
     description:
-      "Phosphorus is a highly reactive nonmetal that exists in several forms (white, red, black). It is essential for life, forming the backbone of DNA and RNA. It's widely used in fertilizers, detergents, and, historically, in matches.",
+      "Phosphorus is a highly reactive nonmetal that exists in several allotropic forms (white, red, black). It is essential for life, forming the phosphate backbone of DNA and RNA and being a key part of ATP, the energy currency of cells. It's widely used in agricultural fertilizers to promote plant growth, as well as in detergents, and, historically, in strike-anywhere matches.",
+    group: 15,
+    period: 3,
+    stateAtSTP: "Solid",
+    meltingPointK: 317.3,
+    boilingPointK: 553.65,
   },
   {
     name: "Sulfur",
@@ -201,7 +281,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ne] 3s² 3p⁴",
     title: "Sulfur (S) - The Brimstone Element",
     description:
-      "Sulfur is a bright yellow, nonmetallic solid. It's known for its distinct smell when burned (as sulfur dioxide). It is essential for life and is a component of two amino acids. Its main use is in the production of sulfuric acid, a key industrial chemical.",
+      "Sulfur is a bright yellow, nonmetallic crystalline solid, known since antiquity as brimstone. It's known for its distinct smell when burned (as sulfur dioxide). It is essential for life, being a component of the amino acids cysteine and methionine. Its main commercial use is in the production of sulfuric acid, one of the most important industrial chemicals, used in fertilizers and batteries.",
+    group: 16,
+    period: 3,
+    stateAtSTP: "Solid",
+    meltingPointK: 388.36,
+    boilingPointK: 717.8,
   },
   {
     name: "Chlorine",
@@ -213,7 +298,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ne] 3s² 3p⁵",
     title: "Chlorine (Cl) - The Purifier",
     description:
-      "Chlorine is a pale green, highly reactive gas. It is a powerful oxidizing agent used for sanitation and disinfection, particularly in swimming pools and drinking water. It is also a key component of PVC plastic and table salt (NaCl).",
+      "Chlorine is a pale green, highly reactive gas with a sharp, pungent odor. It is a powerful oxidizing agent widely used for sanitation and disinfection, particularly in swimming pools and for purifying drinking water. It is also a key component of PVC plastic, many solvents, and forms the chloride ion in common table salt (NaCl), which is essential for life.",
+    group: 17,
+    period: 3,
+    stateAtSTP: "Gas",
+    meltingPointK: 171.6,
+    boilingPointK: 239.11,
   },
   {
     name: "Argon",
@@ -225,7 +315,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ne] 3s² 3p⁶",
     title: "Argon (Ar) - The Inert Shield",
     description:
-      "Argon is the third-most abundant gas in the Earth's atmosphere. As a noble gas, it is inert and colorless. This property makes it useful as a protective atmosphere in welding, electronics manufacturing, and as a fill gas in incandescent light bulbs.",
+      "Argon is the third-most abundant gas in the Earth's atmosphere, making up nearly 1%. As a noble gas, it is colorless, odorless, and extremely inert. This non-reactive property makes it highly useful as a protective atmosphere in arc welding, electronics manufacturing to protect sensitive components, and as a fill gas in incandescent and fluorescent light bulbs to prevent filament oxidation.",
+    group: 18,
+    period: 3,
+    stateAtSTP: "Gas",
+    meltingPointK: 83.8,
+    boilingPointK: 87.3,
   },
   {
     name: "Potassium",
@@ -237,7 +332,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 4s¹",
     title: "Potassium (K) - The Vital Electrolyte",
     description:
-      "Potassium is a soft, silvery-white alkali metal that reacts violently with water. It is an essential mineral and electrolyte for human health, crucial for nerve function and muscle contraction. It is also a major component of fertilizers.",
+      "Potassium is a soft, silvery-white alkali metal that reacts violently with water, producing flammable hydrogen gas. It is an essential mineral and electrolyte for human health, crucial for nerve function, muscle contraction, and maintaining fluid balance. Its compounds, particularly potassium chloride, are a major component of agricultural fertilizers, vital for plant growth.",
+    group: 1,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 336.7,
+    boilingPointK: 1032,
   },
   {
     name: "Calcium",
@@ -249,7 +349,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 4s²",
     title: "Calcium (Ca) - The Builder of Bones",
     description:
-      "Calcium is a reactive, silvery-gray alkaline earth metal. It is the most abundant mineral in the human body, essential for strong bones and teeth. It's also vital for muscle function and cell signaling. It is used in cement and mortar.",
+      "Calcium is a reactive, silvery-gray alkaline earth metal. It is the most abundant mineral in the human body, essential for building and maintaining strong bones and teeth. It's also vital for muscle function, nerve transmission, and cell signaling. Commercially, its compounds like limestone (calcium carbonate) are used to make cement and mortar.",
+    group: 2,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1115,
+    boilingPointK: 1757,
   },
   {
     name: "Scandium",
@@ -261,7 +366,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹ 4s²",
     title: "Scandium (Sc) - The Alloy Enhancer",
     description:
-      "Scandium is a silvery-white transition metal. While not abundant, adding small amounts of scandium to aluminum alloys creates materials that are exceptionally strong and lightweight, used in high-performance equipment like bicycle frames and baseball bats.",
+      "Scandium is a silvery-white transition metal that is relatively soft. While not abundant, adding small amounts of scandium to aluminum alloys creates materials that are exceptionally strong, lightweight, and durable. These high-performance alloys are used in specialized applications like aerospace components, high-end bicycle frames, and baseball bats. It is named after Scandinavia.",
+    group: 3,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1814,
+    boilingPointK: 3109,
   },
   {
     name: "Titanium",
@@ -273,7 +383,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d² 4s²",
     title: "Titanium (Ti) - The Strength of the Titans",
     description:
-      "Titanium is a transition metal known for its high strength-to-weight ratio and excellent corrosion resistance. It is used in aerospace, medical implants, and sporting goods. Its oxide, titanium dioxide, is a bright white pigment used in paint and sunscreen.",
+      "Titanium is a transition metal known for its incredible strength-to-weight ratio, being as strong as some steels but 45% lighter, and excellent corrosion resistance, especially against seawater. It is used in aerospace engineering, medical implants (due to its biocompatibility), and high-performance sporting goods. Its oxide, titanium dioxide, is a bright white pigment used in paints, plastics, and sunscreen.",
+    group: 4,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1941,
+    boilingPointK: 3560,
   },
   {
     name: "Vanadium",
@@ -285,7 +400,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d³ 4s²",
     title: "Vanadium (V) - The Steel Strengthener",
     description:
-      "Vanadium is a hard, silvery-gray transition metal. Its primary use is as an additive to steel, creating high-strength steel alloys used in tools, axles, and structural components. Vanadium compounds can exhibit a wide range of beautiful colors.",
+      "Vanadium is a hard, silvery-gray transition metal that significantly improves the toughness and shock resistance of steel. Its primary use is as an additive to steel, creating high-strength, wear-resistant steel alloys used in tools, axles, and structural components. Vanadium compounds can exhibit a wide range of beautiful colors in solution and are being explored for use in redox flow batteries.",
+    group: 5,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 2183,
+    boilingPointK: 3680,
   },
   {
     name: "Chromium",
@@ -297,7 +417,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d⁵ 4s¹",
     title: "Chromium (Cr) - The Shiny Plating",
     description:
-      "Chromium is a hard, shiny, steel-gray metal known for its high polish and tarnish resistance. It is widely used for chrome plating on cars and fixtures. It's also the key ingredient that makes stainless steel 'stainless'.",
+      "Chromium is a hard, shiny, steel-gray metal known for its high polish and exceptional resistance to tarnish and corrosion. It is widely used for decorative and protective chrome plating on cars, fixtures, and tools. It's also the key alloying element that makes stainless steel 'stainless', typically at a concentration of 10% or more. Its compounds are also used as colorful pigments.",
+    group: 6,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 2180,
+    boilingPointK: 2944,
   },
   {
     name: "Manganese",
@@ -309,7 +434,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d⁵ 4s²",
     title: "Manganese (Mn) - The Unsung Hero of Steel",
     description:
-      "Manganese is a hard, brittle, silvery metal. It is too brittle to be used on its own but is essential in the production of iron and steel, where it improves strength, hardness, and durability. It is also an essential trace nutrient for all known living organisms.",
+      "Manganese is a hard, brittle, silvery metal that resembles iron. It is too brittle to be used on its own but is an essential and irreplaceable agent in the production of iron and steel, where it acts as a deoxidizer and improves strength, hardness, and durability. It is also an essential trace nutrient required for the function of many enzymes in all known living organisms.",
+    group: 7,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1519,
+    boilingPointK: 2334,
   },
   {
     name: "Iron",
@@ -321,7 +451,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d⁶ 4s²",
     title: "Iron (Fe) - The Backbone of Industry",
     description:
-      "Iron is the most common element on Earth by mass and the cornerstone of the modern industrial world. It is the main component of steel, the most important construction material. In the body, iron is a key component of hemoglobin, which carries oxygen in the blood.",
+      "Iron is the most common element on Earth by mass and the cornerstone of the modern industrial world, primarily due to its low cost and high strength. It is the main component of steel, the most widely used structural material. In biology, iron is a key component of the hemoglobin molecule in red blood cells, which is responsible for transporting oxygen throughout the body. It is ferromagnetic and rusts easily.",
+    group: 8,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1811,
+    boilingPointK: 3134,
   },
   {
     name: "Cobalt",
@@ -333,7 +468,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d⁷ 4s²",
     title: "Cobalt (Co) - The Blue Pigment",
     description:
-      "Cobalt is a hard, lustrous, silvery-blue metal. It is used to create strong, corrosion-resistant alloys and powerful magnets. Its compounds have been used for centuries to create a deep blue color in glass, ceramics, and paints (cobalt blue).",
+      "Cobalt is a hard, lustrous, silvery-blue metal that is ferromagnetic. It is used to create strong, corrosion-resistant, and high-temperature alloys, as well as powerful magnets. Its compounds have been used for centuries to create a deep blue color in glass, ceramics, and paints (cobalt blue). It is also a critical component in the cathodes of many lithium-ion batteries.",
+    group: 9,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1768,
+    boilingPointK: 3200,
   },
   {
     name: "Nickel",
@@ -345,7 +485,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d⁸ 4s²",
     title: "Nickel (Ni) - The Corrosion Resistor",
     description:
-      "Nickel is a silvery-white metal with a slight golden tinge. It is highly resistant to corrosion, making it a key component in stainless steel and other alloys. It is also widely used in coins, batteries, and as a plating material.",
+      "Nickel is a silvery-white metal with a slight golden tinge that is hard and ductile. It is highly resistant to corrosion in air and water, making it a key component in stainless steel and other 'superalloys'. It is also widely used in the production of coins (like the US 'nickel'), rechargeable batteries (Ni-Cd and Ni-MH), and as a protective plating material.",
+    group: 10,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1728,
+    boilingPointK: 3186,
   },
   {
     name: "Copper",
@@ -357,7 +502,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹⁰ 4s¹",
     title: "Copper (Cu) - The Conductor of Power",
     description:
-      "Copper is a soft, malleable, and ductile metal with a characteristic reddish-brown color. Its excellent electrical and thermal conductivity makes it the standard for electrical wiring. It is also used in plumbing, roofing, and alloys like brass and bronze.",
+      "Copper is a soft, malleable, and ductile metal with a characteristic reddish-brown color, one of the few colored metals. Its excellent electrical and thermal conductivity makes it the international standard for electrical wiring and motors. It has been used by humans for millennia and is also essential in plumbing, roofing, and in alloys like brass and bronze. It also has natural antimicrobial properties.",
+    group: 11,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1357.77,
+    boilingPointK: 2835,
   },
   {
     name: "Zinc",
@@ -369,7 +519,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹⁰ 4s²",
     title: "Zinc (Zn) - The Sacrificial Protector",
     description:
-      "Zinc is a bluish-white metal that is essential for life. Its main application is galvanizing steel—coating it with a layer of zinc to protect it from rust. It's also a component of brass and is used in batteries and dietary supplements.",
+      "Zinc is a bluish-white metal that is essential for life, playing a crucial role in many enzymes. Its main application is galvanizing steel—coating it with a layer of zinc that sacrificially corrodes to protect the steel from rust. It is also a key component of the alloy brass (with copper) and is used in die-casting, batteries, and as a dietary supplement to support the immune system.",
+    group: 12,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 692.68,
+    boilingPointK: 1180,
   },
   {
     name: "Gallium",
@@ -381,7 +536,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹⁰ 4s² 4p¹",
     title: "Gallium (Ga) - The Melting Metal",
     description:
-      "Gallium is a soft, silvery metal that is famous for its low melting point of 29.76 °C (85.58 °F), which means it will melt in a person's hand. It is a critical component in semiconductors, particularly for manufacturing LEDs (light-emitting diodes).",
+      "Gallium is a soft, silvery metal famous for its low melting point of 29.76 °C (85.58 °F), which means it will melt in a person's hand. It also has one of the largest liquid ranges of any metal. It is a critical component in modern semiconductors, particularly for manufacturing gallium arsenide (GaAs) and gallium nitride (GaN) used in LEDs, cell phone amplifiers, and Blu-ray technology.",
+    group: 13,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 302.91,
+    boilingPointK: 2477,
   },
   {
     name: "Germanium",
@@ -393,7 +553,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹⁰ 4s² 4p²",
     title: "Germanium (Ge) - The Infrared Eye",
     description:
-      "Germanium is a lustrous, hard, grayish-white metalloid. As a semiconductor, it was a key material in early transistors. Today, it is primarily used in fiber-optic systems and infrared optics, as it is transparent to infrared radiation.",
+      "Germanium is a lustrous, hard, grayish-white metalloid. As an important semiconductor, it was a key material in early transistors before being largely replaced by silicon. Today, it is primarily used in fiber-optic systems to increase refractive index, in infrared optics for thermal imaging cameras, and as a polymerization catalyst. It is also used in some high-efficiency solar cells.",
+    group: 14,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1211.4,
+    boilingPointK: 3106,
   },
   {
     name: "Arsenic",
@@ -405,7 +570,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹⁰ 4s² 4p³",
     title: "Arsenic (As) - The Poisonous Metalloid",
     description:
-      "Arsenic is a metalloid that is notoriously toxic. In its metallic gray form, it is brittle and crystalline. Despite its reputation, it has important uses, such as strengthening alloys and as a key semiconductor in integrated circuits (gallium arsenide).",
+      "Arsenic is a metalloid that is notoriously toxic in its inorganic forms. In its common metallic gray form, it is brittle and crystalline. Despite its reputation as a poison, it has important uses, such as strengthening lead alloys for batteries and as a key n-type dopant in semiconductors. Gallium arsenide (GaAs) is a crucial compound for high-speed integrated circuits and LEDs.",
+    group: 15,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 1090,
+    boilingPointK: 887,
   },
   {
     name: "Selenium",
@@ -417,7 +587,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹⁰ 4s² 4p⁴",
     title: "Selenium (Se) - The Photoconductor",
     description:
-      "Selenium is a nonmetal with properties that are intermediate between sulfur and tellurium. Its electrical conductivity changes with light exposure, a property used in photocells and early photocopiers. It is also an essential trace nutrient for animals.",
+      "Selenium is a nonmetal with properties that are intermediate between the elements above and below in the periodic table, sulfur and tellurium. Its electrical conductivity changes with light exposure (photoconductivity), a property used in photocells, early photocopiers, and light meters. It is also an essential trace nutrient for animals, functioning in antioxidant enzymes.",
+    group: 16,
+    period: 4,
+    stateAtSTP: "Solid",
+    meltingPointK: 494,
+    boilingPointK: 958,
   },
   {
     name: "Bromine",
@@ -429,7 +604,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹⁰ 4s² 4p⁵",
     title: "Bromine (Br) - The Liquid Halogen",
     description:
-      "Bromine is a fuming reddish-brown liquid at room temperature, the only halogen to be so. It is highly reactive and corrosive. Bromine compounds are used as flame retardants, in water purification, and in pharmaceuticals.",
+      "Bromine is a fuming reddish-brown liquid at room temperature, the only halogen element to exist in this state under standard conditions. It is highly reactive, corrosive, and has a strong, unpleasant odor. Bromine compounds are used widely as effective flame retardants, in water purification systems, and in the production of some pharmaceuticals and agricultural chemicals.",
+    group: 17,
+    period: 4,
+    stateAtSTP: "Liquid",
+    meltingPointK: 265.8,
+    boilingPointK: 332,
   },
   {
     name: "Krypton",
@@ -441,7 +621,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Ar] 3d¹⁰ 4s² 4p⁶",
     title: "Krypton (Kr) - The Hidden Gas",
     description:
-      "Krypton is a colorless, odorless, noble gas. Its name comes from the Greek word 'kryptos', meaning 'hidden'. It is used with other gases in fluorescent lamps and high-speed photography flashes. For a time, the meter was officially defined by one of its spectral lines.",
+      "Krypton is a colorless, odorless, tasteless noble gas. Its name comes from the Greek word 'kryptos', meaning 'hidden', reflecting its rarity. It is used with other gases in energy-efficient fluorescent lamps, high-speed photography flashes, and some lasers. For a period from 1960 to 1983, the international standard for the meter was officially defined by one of its spectral lines.",
+    group: 18,
+    period: 4,
+    stateAtSTP: "Gas",
+    meltingPointK: 115.79,
+    boilingPointK: 119.93,
   },
   {
     name: "Rubidium",
@@ -453,7 +638,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 5s¹",
     title: "Rubidium (Rb) - The Atomic Clock Component",
     description:
-      "Rubidium is a soft, silvery-white alkali metal that is highly reactive, capable of igniting spontaneously in air. It is used in specialized vacuum tubes and is a key component in atomic clocks, which are the most accurate timekeeping devices known.",
+      "Rubidium is a soft, silvery-white alkali metal that is highly reactive, capable of igniting spontaneously in air and reacting violently with water. It is used in specialized vacuum tubes to remove trace gases and is a key component in atomic clocks, which are the most accurate timekeeping devices known. It is also used in research into Bose-Einstein condensates.",
+    group: 1,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 312.46,
+    boilingPointK: 961,
   },
   {
     name: "Strontium",
@@ -465,7 +655,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 5s²",
     title: "Strontium (Sr) - The Red Firework",
     description:
-      "Strontium is a soft, silvery-white alkaline earth metal that turns yellow when exposed to air. It is best known for the brilliant crimson color its salts impart to flames, making it a common ingredient in fireworks and signal flares.",
+      "Strontium is a soft, silvery-white alkaline earth metal that turns yellow when exposed to air. It is best known for the brilliant crimson color its salts impart to flames, making it a common ingredient in fireworks, emergency signal flares, and military tracer ammunition. The radioactive isotope strontium-90 is a hazardous component of nuclear fallout.",
+    group: 2,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 1050,
+    boilingPointK: 1655,
   },
   {
     name: "Yttrium",
@@ -477,7 +672,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹ 5s²",
     title: "Yttrium (Y) - The Red Phosphor",
     description:
-      "Yttrium is a silvery-metallic transition metal. It is most famously used in red phosphors, such as those that produced the color in older CRT television screens. It is also used in lasers, superconductors, and as an alloy additive.",
+      "Yttrium is a silvery-metallic transition metal chemically similar to the lanthanides. It is most famously used in red phosphors, particularly yttrium oxide-sulfide doped with europium, which produced the red color in older CRT television screens. It is also used in various alloys, lasers (YAG lasers), and is a key component in some high-temperature superconductors.",
+    group: 3,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 1799,
+    boilingPointK: 3609,
   },
   {
     name: "Zirconium",
@@ -489,7 +689,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d² 5s²",
     title: "Zirconium (Zr) - The Nuclear Metal",
     description:
-      "Zirconium is a lustrous, grayish-white transition metal that is highly resistant to corrosion. Because it does not readily absorb neutrons, it is widely used in nuclear reactors as cladding for fuel rods. Its oxide forms the gemstone substitute, cubic zirconia.",
+      "Zirconium is a lustrous, grayish-white transition metal that is highly resistant to corrosion from acids and alkalis. Because it does not readily absorb neutrons, it is widely used in nuclear reactors as cladding for fuel rods. Its oxide, zirconia, is used in hard ceramics, and a synthetic crystalline form is the popular diamond substitute, cubic zirconia.",
+    group: 4,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 2128,
+    boilingPointK: 4682,
   },
   {
     name: "Niobium",
@@ -501,7 +706,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d⁴ 5s¹",
     title: "Niobium (Nb) - The Superconducting Alloy",
     description:
-      "Niobium is a light gray, crystalline, and ductile transition metal. It is used in various superalloys, especially those needing heat resistance, for jet engines. Niobium-based alloys are also important superconductors, used in MRI magnets.",
+      "Niobium is a light gray, crystalline, and ductile transition metal. It is used in various superalloys to increase strength, especially those needing heat resistance for applications like jet engines and rockets. Niobium-based alloys are also important type-II superconductors, used to create the powerful magnets in MRI scanners and particle accelerators.",
+    group: 5,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 2750,
+    boilingPointK: 5017,
   },
   {
     name: "Molybdenum",
@@ -513,7 +723,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d⁵ 5s¹",
     title: "Molybdenum (Mo) - The High-Temperature Metal",
     description:
-      "Molybdenum is a silvery-gray metal with one of the highest melting points of all elements. This property makes it essential for creating high-strength steel alloys that can withstand high temperatures and pressures, used in machinery and military armor.",
+      "Molybdenum is a silvery-gray metal with one of the highest melting points of all pure elements. This property makes it essential for creating high-strength steel alloys that can withstand high temperatures and pressures, used in machinery, military armor, and aircraft parts. It is also an essential trace nutrient for nearly all organisms, functioning as a cofactor in certain enzymes.",
+    group: 6,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 2896,
+    boilingPointK: 4912,
   },
   {
     name: "Technetium",
@@ -525,7 +740,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d⁵ 5s²",
     title: "Technetium (Tc) - The First Artificial Element",
     description:
-      "Technetium is the lightest element whose isotopes are all radioactive. It was the first element to be produced artificially. Its most stable isotope, technetium-99m, is a widely used radioactive tracer in medical diagnostic procedures.",
+      "Technetium is the lightest element whose isotopes are all radioactive, meaning it has no stable form. It was the first element to be produced artificially, hence its name. Its metastable isotope, technetium-99m, is the most widely used radioactive tracer in medical diagnostic procedures like bone and heart scans, due to its short half-life and clear gamma ray emission.",
+    group: 7,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 2430,
+    boilingPointK: 4538,
   },
   {
     name: "Ruthenium",
@@ -537,7 +757,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d⁷ 5s¹",
     title: "Ruthenium (Ru) - The Hardening Catalyst",
     description:
-      "Ruthenium is a rare transition metal belonging to the platinum group. It is used as a hardener for platinum and palladium alloys, making them more wear-resistant for things like electrical contacts. It is also a versatile catalyst.",
+      "Ruthenium is a rare transition metal belonging to the platinum group, making it a noble metal. It is used as a hardener for platinum and palladium alloys, making them more wear-resistant for things like electrical contacts and fountain pen nibs. It is also a versatile catalyst, used in the chemical industry to produce ammonia and acetic acid. Research into its use in solar cells is ongoing.",
+    group: 8,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 2607,
+    boilingPointK: 4423,
   },
   {
     name: "Rhodium",
@@ -549,7 +774,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d⁸ 5s¹",
     title: "Rhodium (Rh) - The Precious Catalyst",
     description:
-      "Rhodium is a silvery-white, hard, and corrosion-resistant noble metal. It is one of the rarest and most valuable precious metals. Its main use is as a catalyst in the catalytic converters of automobiles to clean up exhaust emissions.",
+      "Rhodium is a silvery-white, hard, and corrosion-resistant noble metal. It is one of the rarest and most valuable precious metals, often more expensive than gold. Its main use, accounting for the vast majority of demand, is as a catalyst in the catalytic converters of automobiles to reduce harmful nitrogen oxide emissions from exhaust. It is also used to plate jewelry.",
+    group: 9,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 2237,
+    boilingPointK: 3968,
   },
   {
     name: "Palladium",
@@ -561,7 +791,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰",
     title: "Palladium (Pd) - The Hydrogen Sponge",
     description:
-      "Palladium is a rare, silvery-white metal in the platinum group. Like rhodium, it is a vital catalyst in catalytic converters. It has the unusual ability to absorb up to 900 times its own volume of hydrogen gas, a property studied for hydrogen storage.",
+      "Palladium is a rare, lustrous silvery-white metal in the platinum group. Like rhodium, it is a vital catalyst in catalytic converters for cars. It has the unusual ability to absorb up to 900 times its own volume of hydrogen gas, a property used for hydrogen purification and studied for hydrogen storage. It is also used in jewelry, dentistry, and electronics.",
+    group: 10,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 1828.05,
+    boilingPointK: 3236,
   },
   {
     name: "Silver",
@@ -573,7 +808,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰ 5s¹",
     title: "Silver (Ag) - The Reflective Conductor",
     description:
-      "Silver is a precious metal known for its brilliant white luster. It has the highest electrical and thermal conductivity of any metal. It is used in jewelry, tableware, coins, and high-quality electrical contacts. Silver compounds are also light-sensitive, forming the basis of traditional photography.",
+      "Silver is a precious metal known for its brilliant white luster, the most reflective of any metal. It has the highest electrical and thermal conductivity of all metals. It is used in jewelry, tableware, and coins, but its industrial uses in high-quality electrical contacts and mirrors are also crucial. Silver halide compounds are light-sensitive, forming the basis of traditional film photography.",
+    group: 11,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 1234.93,
+    boilingPointK: 2435,
   },
   {
     name: "Cadmium",
@@ -585,7 +825,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰ 5s²",
     title: "Cadmium (Cd) - The Battery Metal",
     description:
-      "Cadmium is a soft, bluish-white metal similar to zinc. Its primary use has been in nickel-cadmium (NiCd) rechargeable batteries. It is also an excellent corrosion-resistant plating for steel. Due to its toxicity, its use is now declining.",
+      "Cadmium is a soft, bluish-white metal chemically similar to zinc and mercury. Its primary use has been in nickel-cadmium (NiCd) rechargeable batteries and as an excellent corrosion-resistant plating for steel, particularly in the aerospace industry. It is also used in control rods for nuclear reactors. Due to its high toxicity, its use is now declining in many applications.",
+    group: 12,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 594.22,
+    boilingPointK: 1040,
   },
   {
     name: "Indium",
@@ -597,7 +842,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰ 5s² 5p¹",
     title: "Indium (In) - The Touchscreen Metal",
     description:
-      "Indium is a very soft, silvery-white post-transition metal. Its most important compound is indium tin oxide (ITO), which is transparent and electrically conductive. This unique combination makes it essential for manufacturing touchscreens, LCDs, and solar panels.",
+      "Indium is a very soft, silvery-white post-transition metal that is ductile and malleable. Its most important compound is indium tin oxide (ITO), which possesses the rare combination of being both transparent and electrically conductive. This unique property makes it essential for manufacturing transparent electrodes for touchscreens, LCDs, OLED displays, and thin-film solar panels.",
+    group: 13,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 429.75,
+    boilingPointK: 2345,
   },
   {
     name: "Tin",
@@ -609,7 +859,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰ 5s² 5p²",
     title: "Tin (Sn) - The Ancient Alloy",
     description:
-      "Tin is a silvery, malleable post-transition metal. It is best known as a component of bronze, an alloy with copper, which defined the Bronze Age. Today, its main use is in tin plating steel cans to prevent corrosion and as a component of solder.",
+      "Tin is a silvery, malleable post-transition metal that resists corrosion from water. It is best known as a component of bronze, an alloy with copper, which was so significant it defined the Bronze Age. Today, its main use is in tin plating steel cans to prevent food spoilage and as a primary component of lead-free solder used to join electronic components.",
+    group: 14,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 505.08,
+    boilingPointK: 2875,
   },
   {
     name: "Antimony",
@@ -621,7 +876,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰ 5s² 5p³",
     title: "Antimony (Sb) - The Flame Retardant",
     description:
-      "Antimony is a lustrous gray metalloid. Its most significant use is in flame retardants, where it is added to plastics and textiles to prevent them from catching fire. It is also used to harden lead for batteries and bullets.",
+      "Antimony is a lustrous gray metalloid known for its brittleness. Its most significant use is in flame retardants, where antimony trioxide is added to plastics, textiles, and electronics to inhibit combustion and prevent them from catching fire. It is also used to harden lead alloys for lead-acid batteries and bullets, and has some applications in semiconductors.",
+    group: 15,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 903.78,
+    boilingPointK: 1860,
   },
   {
     name: "Tellurium",
@@ -633,7 +893,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰ 5s² 5p⁴",
     title: "Tellurium (Te) - The Alloying Metalloid",
     description:
-      "Tellurium is a brittle, silvery-white metalloid. It is a semiconductor and is often alloyed with other elements to improve their machinability or create specialized thermoelectric devices. It is one of the rarest stable solid elements on Earth.",
+      "Tellurium is a brittle, silvery-white metalloid that is chemically related to selenium and sulfur. It is a p-type semiconductor and is often alloyed with other elements, such as steel and copper, to improve their machinability. It is also used to create specialized thermoelectric devices and in rewritable optical discs (CD-RW, DVD-RW). It is one of the rarest stable solid elements on Earth.",
+    group: 16,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 722.66,
+    boilingPointK: 1261,
   },
   {
     name: "Iodine",
@@ -645,7 +910,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰ 5s² 5p⁵",
     title: "Iodine (I) - The Essential Halogen",
     description:
-      "Iodine is a lustrous, purple-black nonmetal that sublimes into a violet gas. It is an essential nutrient for humans, required for the synthesis of thyroid hormones. It is also used as a disinfectant (tincture of iodine) and in polarizing filters for LCDs.",
+      "Iodine is a lustrous, purple-black nonmetal that sublimes at standard temperatures into a violet gas with an irritating odor. It is an essential trace nutrient for humans, required by the thyroid gland to synthesize hormones that regulate metabolism. It is also used as a powerful disinfectant (tincture of iodine) and in polarizing filters for LCD screens.",
+    group: 17,
+    period: 5,
+    stateAtSTP: "Solid",
+    meltingPointK: 386.85,
+    boilingPointK: 457.4,
   },
   {
     name: "Xenon",
@@ -657,7 +927,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Kr] 4d¹⁰ 5s² 5p⁶",
     title: "Xenon (Xe) - The High-Intensity Light",
     description:
-      "Xenon is a heavy, colorless, odorless noble gas. It is used in specialized light sources that produce a bright, white light similar to daylight, such as photographic flashes, movie projectors, and high-intensity car headlamps.",
+      "Xenon is a heavy, colorless, odorless noble gas that is generally unreactive. It is used in specialized light sources that produce a bright, white light similar to daylight, such as photographic flashes, movie projectors, and high-intensity discharge (HID) car headlamps. It is also used as a general anesthetic and as a propellant in ion thrusters for spacecraft.",
+    group: 18,
+    period: 5,
+    stateAtSTP: "Gas",
+    meltingPointK: 161.4,
+    boilingPointK: 165.03,
   },
   {
     name: "Cesium",
@@ -669,7 +944,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 6s¹",
     title: "Cesium (Cs) - The Most Reactive Metal",
     description:
-      "Cesium is a soft, silvery-gold alkali metal that is liquid near room temperature. It is the most reactive and most electropositive of all stable elements, exploding on contact with water. Its most famous use is in atomic clocks, providing the modern definition of a second.",
+      "Cesium is a soft, silvery-gold alkali metal that is liquid near room temperature, with a melting point of just 28.5 °C. It is the most reactive and most electropositive of all stable elements, exploding on contact with water. Its most famous use is in cesium fountain atomic clocks, which provide the incredibly precise modern definition of a second. It is also used in drilling fluids.",
+    group: 1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 301.7,
+    boilingPointK: 944,
   },
   {
     name: "Barium",
@@ -681,7 +961,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 6s²",
     title: "Barium (Ba) - The Medical Imager",
     description:
-      "Barium is a soft, silvery alkaline earth metal. Due to its high density, barium sulfate is opaque to X-rays and is used as a 'barium meal' to image the gastrointestinal tract in medicine. It also gives a pale green color to fireworks.",
+      "Barium is a soft, silvery alkaline earth metal that is chemically similar to calcium. Due to its high density, the compound barium sulfate is opaque to X-rays and is ingested by patients as a 'barium meal' to provide clear imaging of the gastrointestinal tract in medicine. It also gives a characteristic pale green color to fireworks and is used as a 'getter' to remove residual gas from vacuum tubes.",
+    group: 2,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1000,
+    boilingPointK: 2170,
   },
   {
     name: "Lanthanum",
@@ -693,7 +978,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 5d¹ 6s²",
     title: "Lanthanum (La) - The Hidden Element",
     description:
-      "Lanthanum is a soft, silvery-white metal that gives its name to the lanthanide series. It is used in high-quality camera lenses and optical glass to improve the refractive index. It's also found in the nickel-metal hydride batteries used in hybrid cars.",
+      "Lanthanum is a soft, ductile, silvery-white metal that gives its name to the lanthanide series of elements. Its name means 'to lie hidden' as it was difficult to separate from other rare earths. It is used to make high-refractive-index glass for high-quality camera lenses and telescopes. It is also a major component of the nickel-metal hydride (NiMH) batteries used in many hybrid cars.",
+    group: 3,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1193,
+    boilingPointK: 3737,
   },
   {
     name: "Cerium",
@@ -705,7 +995,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹ 5d¹ 6s²",
     title: "Cerium (Ce) - The Most Abundant Rare Earth",
     description:
-      "Cerium is the most abundant of the rare-earth elements. It is a key component in the flint of lighters and is used as a polishing agent for glass and lenses (cerium oxide). It also acts as a catalyst in self-cleaning ovens.",
+      "Cerium is a soft, silvery-white metal and the most abundant of the rare-earth elements, making up a significant portion of ores like monazite. It is a key component in the 'flint' of lighters (ferrocerium). Its oxide is a highly effective abrasive used for precision polishing of glass and lenses. It also acts as a catalyst in self-cleaning ovens and diesel fuel additives.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1068,
+    boilingPointK: 3716,
   },
   {
     name: "Praseodymium",
@@ -717,7 +1012,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f³ 6s²",
     title: "Praseodymium (Pr) - The Green Twin",
     description:
-      "Praseodymium is a soft, silvery rare-earth metal. It is used with neodymium to create high-strength magnets. Its compounds produce a characteristic yellow-green color in glass and ceramics, often used in welder's goggles.",
+      "Praseodymium is a soft, silvery rare-earth metal, named 'green twin' because of the color of its salt. It is used with neodymium to create high-strength magnets used in electric motors and wind turbines. Its compounds produce a characteristic yellow-green color in glass and ceramics, and this glass is used to make welder's and glassblower's goggles as it blocks infrared radiation.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1208,
+    boilingPointK: 3793,
   },
   {
     name: "Neodymium",
@@ -729,7 +1029,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f⁴ 6s²",
     title: "Neodymium (Nd) - The Super Magnet",
     description:
-      "Neodymium is a silvery-white rare-earth metal. Its most important use is in creating neodymium magnets (NdFeB), the strongest type of permanent magnet known. These are critical for headphones, hard drives, electric motors, and wind turbines.",
+      "Neodymium is a soft, silvery-white rare-earth metal that rapidly tarnishes in air. Its most important use is in creating neodymium magnets (an alloy of neodymium, iron, and boron - NdFeB), which are the strongest type of permanent magnet known. These powerful, lightweight magnets are critical for consumer electronics like headphones and hard drives, as well as electric motors and wind turbines.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1297,
+    boilingPointK: 3347,
   },
   {
     name: "Promethium",
@@ -741,7 +1046,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f⁵ 6s²",
     title: "Promethium (Pm) - The Luminous Paint",
     description:
-      "Promethium is an extremely rare, radioactive rare-earth metal. All its isotopes are unstable. It is used in luminous paints for watches and signs that glow in the dark, and in specialized atomic batteries for spacecraft and missiles.",
+      "Promethium is an extremely rare, radioactive rare-earth metal, with all its isotopes being unstable. It is one of only two radioactive elements followed in the periodic table by stable elements. It is used in luminous paints for watches and signs that glow in the dark without external energy, and in specialized atomic batteries for spacecraft and missiles where long life is required.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1315,
+    boilingPointK: 3273,
   },
   {
     name: "Samarium",
@@ -753,7 +1063,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f⁶ 6s²",
     title: "Samarium (Sm) - The High-Temperature Magnet",
     description:
-      "Samarium is a silvery-white rare-earth metal. It is used to create powerful samarium-cobalt magnets, which are notable for their ability to retain their magnetism at very high temperatures, making them useful in military and aerospace applications.",
+      "Samarium is a silvery-white rare-earth metal that is stable in air. It is used to create powerful samarium-cobalt magnets, which are notable for their ability to retain their magnetism at very high temperatures (up to 700°C). This makes them highly useful in demanding military, aerospace, and high-performance motor applications where heat resistance is critical.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1345,
+    boilingPointK: 2067,
   },
   {
     name: "Europium",
@@ -765,7 +1080,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f⁷ 6s²",
     title: "Europium (Eu) - The Red and Blue Phosphor",
     description:
-      "Europium is a moderately hard, silvery rare-earth metal. It is brilliantly fluorescent, making it crucial as the red and blue phosphors in television screens and fluorescent lamps. It is also used in anti-counterfeiting phosphors in Euro banknotes.",
+      "Europium is a moderately hard, silvery rare-earth metal, the most reactive of its series. It is brilliantly fluorescent under UV light, making it crucial as the red and blue phosphors in television screens and fluorescent lamps, providing color fidelity. It is also used in anti-counterfeiting phosphors embedded in Euro banknotes to ensure their authenticity.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1099,
+    boilingPointK: 1802,
   },
   {
     name: "Gadolinium",
@@ -777,7 +1097,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f⁷ 5d¹ 6s²",
     title: "Gadolinium (Gd) - The MRI Contrast Agent",
     description:
-      "Gadolinium is a silvery-white rare-earth metal that is ferromagnetic at low temperatures. Its compounds are highly effective as contrast agents in MRI scans, enhancing the visibility of tumors and tissues. It also has the highest neutron-capture cross-section of any stable element.",
+      "Gadolinium is a silvery-white rare-earth metal that is ferromagnetic at low temperatures. Its compounds have exceptionally high magnetic moments, making them highly effective as intravenous contrast agents in MRI scans, enhancing the visibility of tumors and tissues. It also has the highest neutron-capture cross-section of any stable element, suggesting uses in nuclear shielding.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1585,
+    boilingPointK: 3546,
   },
   {
     name: "Terbium",
@@ -789,7 +1114,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f⁹ 6s²",
     title: "Terbium (Tb) - The Green Phosphor",
     description:
-      "Terbium is a silvery-white rare-earth metal that is soft enough to be cut with a knife. It is used as the green phosphor in CRT screens and fluorescent lamps. It's also a component of Terfenol-D, an alloy that changes shape in a magnetic field, used in naval sonar systems.",
+      "Terbium is a silvery-white rare-earth metal that is soft enough to be cut with a knife. It is used as the green phosphor in CRT screens and energy-efficient fluorescent lamps, emitting a brilliant lemon-yellow light. It's also a component of Terfenol-D, a magnetostrictive alloy that changes shape in a magnetic field, which is used in advanced naval sonar systems and sensors.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1629,
+    boilingPointK: 3503,
   },
   {
     name: "Dysprosium",
@@ -801,7 +1131,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁰ 6s²",
     title: "Dysprosium (Dy) - The Magnet Additive",
     description:
-      "Dysprosium is a rare-earth metal with a bright silver luster. Its primary use is as an additive in neodymium magnets to help them resist demagnetization at high temperatures, which is critical for electric vehicle motors and wind turbines.",
+      "Dysprosium is a rare-earth metal with a bright metallic silver luster. Its primary use is as an additive in neodymium magnets to improve their coercivity, helping them resist demagnetization at high temperatures. This is critical for the durability of magnets in electric vehicle motors and wind turbine generators. It is also used in control rods for nuclear reactors.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1680,
+    boilingPointK: 2840,
   },
   {
     name: "Holmium",
@@ -813,7 +1148,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹¹ 6s²",
     title: "Holmium (Ho) - The Magnetic Concentrator",
     description:
-      "Holmium is a bright, soft, silvery rare-earth metal. It has the highest magnetic strength of any element, which allows it to be used to create the pole pieces of the strongest static magnets. Its compounds are used to color glass yellow or red.",
+      "Holmium is a bright, soft, silvery rare-earth metal. It possesses the highest magnetic strength of any element, which allows it to be used to create the pole pieces of the strongest static magnets, concentrating magnetic flux. Its compounds are used to color glass and cubic zirconia yellow or red, and it is a key component in some solid-state lasers.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1734,
+    boilingPointK: 2993,
   },
   {
     name: "Erbium",
@@ -825,7 +1165,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹² 6s²",
     title: "Erbium (Er) - The Fiber Optic Amplifier",
     description:
-      "Erbium is a silvery-white solid rare-earth metal. Its most important application is in erbium-doped fiber amplifiers (EDFAs), which boost the signal in long-distance fiber optic cables, forming the backbone of the internet.",
+      "Erbium is a silvery-white solid rare-earth metal that is relatively stable in air. Its most important application is in erbium-doped fiber amplifiers (EDFAs), which are devices that boost the signal in long-distance fiber optic cables without needing to convert it to electricity. These amplifiers form the backbone of the internet and global telecommunications networks. It's also used to create pink-colored glass.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1802,
+    boilingPointK: 3141,
   },
   {
     name: "Thulium",
@@ -837,7 +1182,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹³ 6s²",
     title: "Thulium (Tm) - The Portable X-ray Source",
     description:
-      "Thulium is the least abundant of the stable rare-earth elements. When bombarded with neutrons in a reactor, it produces an isotope that emits X-rays, making it useful in portable X-ray devices for medical and industrial purposes.",
+      "Thulium is the least abundant of the stable rare-earth elements and the second-least abundant of all lanthanides. When bombarded with neutrons in a nuclear reactor, it produces an isotope that emits X-rays, making it useful in portable, non-electric X-ray devices for medical and industrial purposes. It has a bright, silvery luster but is not widely used due to its high cost.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1818,
+    boilingPointK: 2223,
   },
   {
     name: "Ytterbium",
@@ -849,7 +1199,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 6s²",
     title: "Ytterbium (Yb) - The Steel Improver",
     description:
-      "Ytterbium is a soft, silvery rare-earth metal. It is used to improve the grain refinement, strength, and other mechanical properties of stainless steel. It is also a potential component of highly accurate atomic clocks.",
+      "Ytterbium is a soft, silvery rare-earth metal that is ductile and malleable. It is used as an alloying agent to improve the grain refinement, strength, and other mechanical properties of stainless steel. It is also a potential component of highly accurate atomic clocks and has been used as a radiation source for portable X-ray machines. It reacts slowly with water.",
+    group: -1,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1097,
+    boilingPointK: 1469,
   },
   {
     name: "Lutetium",
@@ -861,7 +1216,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹ 6s²",
     title: "Lutetium (Lu) - The Final Lanthanide",
     description:
-      "Lutetium is the last element in the lanthanide series. It is a very rare and expensive silvery-white metal. Its uses are limited, but its radioactive isotopes can be used in cancer therapy, and it serves as a catalyst in certain industrial processes.",
+      "Lutetium is the last element in the lanthanide series, and is sometimes considered the first of the 6th-period transition metals. It is a very rare and expensive silvery-white metal. Its uses are limited, but its radioactive isotopes can be used in targeted cancer therapy, and it serves as a catalyst in cracking hydrocarbons in oil refineries. It is the densest lanthanide.",
+    group: 3,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1925,
+    boilingPointK: 3675,
   },
   {
     name: "Hafnium",
@@ -873,7 +1233,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d² 6s²",
     title: "Hafnium (Hf) - The Neutron Absorber",
     description:
-      "Hafnium is a lustrous, silvery-gray transition metal. It is chemically similar to zirconium and is found in the same minerals. Its excellent ability to absorb neutrons makes it ideal for use in control rods in nuclear submarines.",
+      "Hafnium is a lustrous, silvery-gray transition metal. It is chemically very similar to zirconium and is found in the same minerals, making it difficult to separate. Its excellent ability to absorb neutrons makes it ideal for use in control rods in nuclear submarines and power plants, where it regulates the fission process. It is also used in microprocessors and alloys.",
+    group: 4,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 2506,
+    boilingPointK: 4876,
   },
   {
     name: "Tantalum",
@@ -885,7 +1250,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d³ 6s²",
     title: "Tantalum (Ta) - The Capacitor Metal",
     description:
-      "Tantalum is a rare, hard, blue-gray transition metal that is highly corrosion-resistant. Its main use is in producing tantalum capacitors, which are small, reliable, and essential components in mobile phones, laptops, and other electronics.",
+      "Tantalum is a rare, hard, blue-gray transition metal that is highly corrosion-resistant and has a high melting point. Its main use is in producing tantalum electrolytic capacitors, which are small, reliable, and essential components in modern electronics like mobile phones, laptops, and automotive systems. Its inertness also makes it useful for medical implants.",
+    group: 5,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 3290,
+    boilingPointK: 5731,
   },
   {
     name: "Tungsten",
@@ -897,7 +1267,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d⁴ 6s²",
     title: "Tungsten (W) - The Highest Melting Point",
     description:
-      "Tungsten has the highest melting point of all metallic elements. This property makes it perfect for the filaments in incandescent light bulbs. It is also extremely dense and hard, used in armor-piercing ammunition and industrial cutting tools (tungsten carbide).",
+      "Tungsten (from Swedish 'tung sten' meaning 'heavy stone', symbol W from its German name Wolfram) has the highest melting point of all metallic elements. This property makes it perfect for the filaments in incandescent light bulbs and vacuum tubes. It is also extremely dense and hard, used in armor-piercing ammunition and industrial cutting tools (as tungsten carbide).",
+    group: 6,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 3695,
+    boilingPointK: 5828,
   },
   {
     name: "Rhenium",
@@ -909,7 +1284,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d⁵ 6s²",
     title: "Rhenium (Re) - The Jet Engine Superalloy",
     description:
-      "Rhenium is a silvery-white, heavy, and rare transition metal. It has one of the highest melting points. Its primary use is in high-temperature superalloys for making turbine blades and exhaust nozzles in jet engines.",
+      "Rhenium is a silvery-white, heavy, and extremely rare transition metal. It has one of the highest melting points of any element, exceeded only by tungsten and carbon. Its primary use is in high-temperature superalloys, particularly with nickel, for making turbine blades and exhaust nozzles in jet engines where extreme heat and stress resistance are required.",
+    group: 7,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 3459,
+    boilingPointK: 5869,
   },
   {
     name: "Osmium",
@@ -921,7 +1301,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d⁶ 6s²",
     title: "Osmium (Os) - The Densest Element",
     description:
-      "Osmium is the densest naturally occurring element. It is a hard, brittle, blue-white transition metal. Due to its hardness and durability, it is used in alloys for fountain pen tips, electrical contacts, and other applications where extreme wear resistance is needed.",
+      "Osmium is the densest naturally occurring element, twice as dense as lead. It is a hard, brittle, blue-white transition metal from the platinum group. Due to its extreme hardness and durability, it is used in alloys for high-wear applications like fountain pen tips, electrical contacts, and instrument pivots. Its oxide is highly toxic and has a sharp smell.",
+    group: 8,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 3306,
+    boilingPointK: 5285,
   },
   {
     name: "Iridium",
@@ -933,7 +1318,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d⁷ 6s²",
     title: "Iridium (Ir) - The Most Corrosion-Resistant",
     description:
-      "Iridium is a very hard, brittle, silvery-white metal from the platinum group. It is considered the most corrosion-resistant metal known. It is used in high-performance spark plugs, crucibles for growing crystals, and was used to coat the Voyager spacecraft's fuel tanks.",
+      "Iridium is a very hard, brittle, silvery-white metal from the platinum group. It is considered the most corrosion-resistant metal known, withstanding attack from nearly all acids, aqua regia, and high temperatures. It is used in high-performance spark plugs, crucibles for growing industrial crystals, and its abundance in a geological layer is evidence for the asteroid impact that wiped out the dinosaurs.",
+    group: 9,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 2719,
+    boilingPointK: 4701,
   },
   {
     name: "Platinum",
@@ -945,7 +1335,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d⁹ 6s¹",
     title: "Platinum (Pt) - The Precious Catalyst",
     description:
-      "Platinum is a dense, malleable, and highly unreactive precious metal. It is prized in jewelry for its beauty and resistance to tarnish. It is also a vital industrial material, used extensively in catalytic converters, laboratory equipment, and medical devices.",
+      "Platinum is a dense, malleable, and highly unreactive precious metal. It is prized in jewelry for its brilliant white luster and resistance to tarnish. Industrially, it is a vital catalyst, used extensively in automotive catalytic converters, petroleum refining, and in the production of chemicals like nitric acid. Its stability also makes it ideal for laboratory equipment and medical devices.",
+    group: 10,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 2041.4,
+    boilingPointK: 4098,
   },
   {
     name: "Gold",
@@ -957,7 +1352,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹⁰ 6s¹",
     title: "Gold (Au) - The Eternal Metal",
     description:
-      "Gold is a bright, slightly reddish-yellow, dense, and soft precious metal. Valued since antiquity for its beauty, rarity, and resistance to corrosion, it is used for coinage, jewelry, and as a financial standard. It is also an excellent electrical conductor used in high-end electronics.",
+      "Gold is a bright, slightly reddish-yellow, dense, and soft precious metal, famous for being the most malleable and ductile of all metals. Valued since antiquity for its beauty, rarity, and extreme resistance to corrosion, it is used for coinage, jewelry, and as a financial standard. It is also an excellent electrical conductor, used to plate connectors in high-end electronics.",
+    group: 11,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 1337.33,
+    boilingPointK: 3129,
   },
   {
     name: "Mercury",
@@ -969,7 +1369,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹⁰ 6s²",
     title: "Mercury (Hg) - The Liquid Metal",
     description:
-      "Mercury is the only metallic element that is liquid at standard conditions for temperature and pressure. This silvery-white metal is used in thermometers, barometers, and fluorescent lighting. It is highly toxic, and its use is now heavily restricted.",
+      "Mercury is the only metallic element that is liquid at standard conditions for temperature and pressure, a property that makes it unique. This heavy, silvery-white metal is used in thermometers, barometers, and fluorescent lighting. It forms alloys called amalgams with other metals like gold and silver. It and its compounds are highly toxic, and its use is now heavily restricted.",
+    group: 12,
+    period: 6,
+    stateAtSTP: "Liquid",
+    meltingPointK: 234.32,
+    boilingPointK: 629.88,
   },
   {
     name: "Thallium",
@@ -981,7 +1386,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹",
     title: "Thallium (Tl) - The Poisoner's Poison",
     description:
-      "Thallium is a soft, grayish post-transition metal that resembles tin but discolors on exposure to air. It is extremely toxic and was historically used as a rat poison and insecticide, but this is now banned in most countries. It has niche uses in electronics and optics.",
+      "Thallium is a soft, grayish post-transition metal that resembles tin but discolors on exposure to air. It is extremely toxic to humans and was historically used as a potent rat poison and insecticide, but this is now banned in most countries. It has niche uses in specialized electronics, low-temperature thermometers, and in lenses for infrared optics.",
+    group: 13,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 577,
+    boilingPointK: 1746,
   },
   {
     name: "Lead",
@@ -993,7 +1403,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²",
     title: "Lead (Pb) - The Dense Shield",
     description:
-      "Lead is a heavy, soft, and malleable post-transition metal. Its high density makes it an excellent shield against radiation (X-rays and gamma rays). It is the primary component of lead-acid batteries used in cars. Its use has been reduced due to its toxicity.",
+      "Lead is a heavy, soft, and malleable post-transition metal with a low melting point. Its high density makes it an excellent shield against radiation, particularly X-rays and gamma rays, used in hospitals and nuclear facilities. It is the primary component of lead-acid batteries used in cars. Its use in paint, gasoline, and plumbing has been phased out due to its neurotoxicity.",
+    group: 14,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 600.61,
+    boilingPointK: 2022,
   },
   {
     name: "Bismuth",
@@ -1005,7 +1420,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³",
     title: "Bismuth (Bi) - The Non-Toxic Heavy Metal",
     description:
-      "Bismuth is a brittle, silvery-white metal with a pinkish tinge due to an oxide layer. It is unusually non-toxic for a heavy metal and is used in stomach-soothing remedies like Pepto-Bismol. Its alloys have low melting points, used in fuses and fire sprinklers.",
+      "Bismuth is a brittle, silvery-white metal with a distinct pinkish tinge due to a surface oxide layer. It is unusually non-toxic for a heavy metal and is used in stomach-soothing remedies like Pepto-Bismol. Its alloys have very low melting points and are used as lead-substitutes in solder, fuses, and fire sprinklers. It is technically radioactive but its half-life is billions of times the age of the universe.",
+    group: 15,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 544.7,
+    boilingPointK: 1837,
   },
   {
     name: "Polonium",
@@ -1017,7 +1437,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴",
     title: "Polonium (Po) - The Radioactive Toxin",
     description:
-      "Polonium is a rare and highly radioactive metalloid. It is intensely toxic, even in minute amounts. It has been used as a source of alpha particles in scientific research and, controversially, as a poison. It is also used to eliminate static electricity in industrial settings.",
+      "Polonium is a rare and highly radioactive metalloid discovered by Marie Curie, who named it after her native Poland. It is intensely toxic, even in minute amounts, due to its alpha radiation. It has been used as a compact source of alpha particles in scientific research and, controversially, as a poison. It is also used in devices to eliminate static electricity in industrial settings.",
+    group: 16,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 527,
+    boilingPointK: 1235,
   },
   {
     name: "Astatine",
@@ -1029,7 +1454,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵",
     title: "Astatine (At) - The Rarest Element",
     description:
-      "Astatine is the rarest naturally occurring element on Earth. It is a highly radioactive halogen. All its isotopes are short-lived, making it extremely difficult to study. It is being researched for use in targeted alpha-particle therapy for cancer.",
+      "Astatine is the rarest naturally occurring element in the Earth's crust. It is a highly radioactive halogen, and its properties are inferred to be similar to iodine. All its isotopes are extremely short-lived, with the longest half-life being just over 8 hours, making it incredibly difficult to study. It is being researched for use in targeted alpha-particle therapy for cancer due to its potent radiation.",
+    group: 17,
+    period: 6,
+    stateAtSTP: "Solid",
+    meltingPointK: 575,
+    boilingPointK: 610,
   },
   {
     name: "Radon",
@@ -1041,7 +1471,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶",
     title: "Radon (Rn) - The Radioactive Noble Gas",
     description:
-      "Radon is a colorless, odorless, and radioactive noble gas. It is formed from the natural decay of uranium in soil and rock. It can accumulate in buildings and is a significant cause of lung cancer. Medically, it has been used in radiation therapy.",
+      "Radon is a colorless, odorless, and radioactive noble gas. It is formed from the natural radioactive decay of uranium in soil, rock, and water. It can seep into buildings and accumulate to dangerous levels, being a significant cause of lung cancer after smoking. Medically, it has been used in radiation therapy, though this practice is now rare. It is the densest known gas.",
+    group: 18,
+    period: 6,
+    stateAtSTP: "Gas",
+    meltingPointK: 202,
+    boilingPointK: 211.5,
   },
   {
     name: "Francium",
@@ -1053,7 +1488,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 7s¹",
     title: "Francium (Fr) - The Most Unstable",
     description:
-      "Francium is the second-rarest naturally occurring element, after astatine. It is an extremely unstable alkali metal with a half-life of only 22 minutes for its longest-lived isotope. Due to its instability and rarity, it has no commercial applications.",
+      "Francium is the second-rarest naturally occurring element, after astatine, and the most electropositive. It is an extremely unstable alkali metal, with a half-life of only 22 minutes for its longest-lived isotope. It is found in trace amounts in uranium ores. Due to its extreme instability and rarity, it has never been viewed in bulk and has no commercial applications, being used only in physics research.",
+    group: 1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 300,
+    boilingPointK: 950,
   },
   {
     name: "Radium",
@@ -1065,7 +1505,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 7s²",
     title: "Radium (Ra) - The Luminous Danger",
     description:
-      "Radium is a silvery-white, highly radioactive alkaline earth metal. It was famously used in self-luminous paints for watches and dials until its health risks became known. It was discovered by Marie and Pierre Curie and played a key role in the development of radiotherapy.",
+      "Radium is a silvery-white, highly radioactive alkaline earth metal. It was famously used in self-luminous paints for watches and instrument dials until its severe health risks became known. Discovered by Marie and Pierre Curie, its study was pivotal in the development of radiotherapy for cancer, though it has been replaced by safer alternatives. It glows blue in the dark.",
+    group: 2,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 973,
+    boilingPointK: 2010,
   },
   {
     name: "Actinium",
@@ -1077,7 +1522,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 6d¹ 7s²",
     title: "Actinium (Ac) - The Prototypical Actinide",
     description:
-      "Actinium is a soft, silvery-white radioactive metal that gives its name to the actinide series. It is about 150 times as radioactive as radium. Its intense radioactivity makes it a valuable neutron source, but it has few other industrial uses.",
+      "Actinium is a soft, silvery-white radioactive metal that gives its name to the actinide series. It is about 150 times as radioactive as radium, glowing with a pale blue light in the dark due to its intense radioactivity. This property makes it a valuable neutron source for research, but it has few other industrial uses. It is found in trace amounts in uranium ore.",
+    group: 3,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1323,
+    boilingPointK: 3471,
   },
   {
     name: "Thorium",
@@ -1089,7 +1539,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 6d² 7s²",
     title: "Thorium (Th) - The Potential Nuclear Fuel",
     description:
-      "Thorium is a weakly radioactive, silvery metal. It is much more abundant than uranium and is being investigated as a safer and more efficient alternative fuel for nuclear reactors. It is also used in high-quality optics and gas mantles.",
+      "Thorium is a weakly radioactive, silvery metal that is stable and tarnishes black when exposed to air. It is much more abundant than uranium and is being seriously investigated as a safer and more efficient alternative fuel for thorium-based nuclear reactors. It was previously used in high-quality optics and gas mantles for lanterns due to its high refractive index and incandescence.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 2115,
+    boilingPointK: 5061,
   },
   {
     name: "Protactinium",
@@ -1101,7 +1556,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f² 6d¹ 7s²",
     title: "Protactinium (Pa) - The Elusive Actinide",
     description:
-      "Protactinium is a dense, silvery-gray radioactive actinide. It is one of the rarest and most expensive naturally occurring elements. Due to its scarcity, toxicity, and high radioactivity, it currently has no uses outside of basic scientific research.",
+      "Protactinium is a dense, silvery-gray radioactive actinide metal that is one of the rarest and most expensive naturally occurring elements. It is primarily extracted from spent nuclear fuel. Due to its scarcity, toxicity, and high radioactivity, it currently has no uses outside of fundamental scientific research. It is a superconductor at low temperatures.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1841,
+    boilingPointK: 4300,
   },
   {
     name: "Uranium",
@@ -1113,7 +1573,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f³ 6d¹ 7s²",
     title: "Uranium (U) - The Fuel of Fission",
     description:
-      "Uranium is a silvery-gray, weakly radioactive metal. It is the primary fuel for nuclear reactors and the main material for nuclear weapons. Its high density also makes it useful as a counterweight in aircraft and in armor-piercing projectiles.",
+      "Uranium is a silvery-gray, weakly radioactive metal and the heaviest naturally occurring element. Its isotope uranium-235 is the primary fuel for nuclear reactors and the main material for the first nuclear weapons. Its very high density also makes depleted uranium (mostly U-238) useful as a counterweight in aircraft and in armor-piercing projectiles. It was once used to color glass.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1405.3,
+    boilingPointK: 4404,
   },
   {
     name: "Neptunium",
@@ -1125,7 +1590,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f⁴ 6d¹ 7s²",
     title: "Neptunium (Np) - The First Transuranic",
     description:
-      "Neptunium is the first transuranic element, meaning it has an atomic number greater than uranium. It is a radioactive, silvery actinide. It is primarily a byproduct of nuclear reactor operation and has some use in neutron detection instruments.",
+      "Neptunium is the first transuranic element, meaning it has an atomic number greater than uranium, and is named after the planet Neptune. It is a radioactive, silvery actinide metal. It is primarily a byproduct of nuclear reactor operation and can be used to produce plutonium-238. It has some niche use in neutron detection instruments but is mainly of academic interest.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 917,
+    boilingPointK: 4273,
   },
   {
     name: "Plutonium",
@@ -1137,7 +1607,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f⁶ 7s²",
     title: "Plutonium (Pu) - The Nuclear Powerhouse",
     description:
-      "Plutonium is a radioactive actinide metal. It is the primary fissile isotope used in most modern nuclear weapons. It is also used as a fuel in some nuclear reactors and as a long-lived power source for deep space probes like the New Horizons mission to Pluto.",
+      "Plutonium is a radioactive actinide metal with a silvery-gray appearance that tarnishes in air. Its isotope plutonium-239 is the primary fissile material used in most modern nuclear weapons. It is also used as a fuel in some nuclear reactors and as a long-lived power source for deep space probes like Cassini and New Horizons, in the form of radioisotope thermoelectric generators (RTGs).",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 912.5,
+    boilingPointK: 3505,
   },
   {
     name: "Americium",
@@ -1149,7 +1624,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f⁷ 7s²",
     title: "Americium (Am) - The Smoke Detector",
     description:
-      "Americium is a synthetic radioactive element. Its most common application is in household smoke detectors, where a tiny amount of americium-241 emits alpha particles that ionize the air, allowing a small current to flow. Smoke disrupts this current, triggering the alarm.",
+      "Americium is a synthetic radioactive element with a silvery luster, named after the Americas. Its most common and well-known application is in household ionization-type smoke detectors. A tiny amount of americium-241 emits alpha particles that ionize the air in a chamber; smoke disrupts this current, triggering the alarm. It is also used in some industrial gauges.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1449,
+    boilingPointK: 2284,
   },
   {
     name: "Curium",
@@ -1161,7 +1641,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f⁷ 6d¹ 7s²",
     title: "Curium (Cm) - The Alpha Emitter",
     description:
-      "Curium is a hard, dense, silvery radioactive element named after Marie and Pierre Curie. It is a powerful alpha-particle emitter and has been used as a power source in radioisotope thermoelectric generators (RTGs) for spacecraft and pacemakers.",
+      "Curium is a hard, dense, silvery radioactive element named in honor of Marie and Pierre Curie. It is a powerful alpha-particle emitter that generates significant heat from decay. This property has allowed it to be used as a power source in radioisotope thermoelectric generators (RTGs) for spacecraft and pacemakers. It was also used to bombard targets to produce heavier elements.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1613,
+    boilingPointK: 3383,
   },
   {
     name: "Berkelium",
@@ -1173,7 +1658,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f⁹ 7s²",
     title: "Berkelium (Bk) - The Research Element",
     description:
-      "Berkelium is a synthetic radioactive element named after Berkeley, California, the home of the lab where it was discovered. It is produced in minute quantities and is used almost exclusively for scientific research, particularly for synthesizing heavier elements.",
+      "Berkelium is a synthetic radioactive element named after Berkeley, California, the home of the University of California lab where it was discovered. It is produced in minute, milligram quantities in specialized nuclear reactors. Due to its rarity and short half-life, it is used almost exclusively for scientific research, particularly for bombarding with other particles to synthesize even heavier elements like tennessine.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1259,
+    boilingPointK: 2900,
   },
   {
     name: "Californium",
@@ -1185,7 +1675,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁰ 7s²",
     title: "Californium (Cf) - The Neutron Source",
     description:
-      "Californium is a radioactive element named after the state of California. It is a very strong neutron emitter, with one microgram emitting 170 million neutrons per minute. This makes it useful for starting up nuclear reactors and in cancer treatment.",
+      "Californium is a radioactive element named after the state and university of California. It is a very strong neutron emitter, with one microgram of californium-252 emitting over 100 million neutrons per minute. This unique property makes it useful for starting up nuclear reactors, in material scanners for luggage inspection, and as a radiation source for certain types of cancer treatment.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1173,
+    boilingPointK: 1743,
   },
   {
     name: "Einsteinium",
@@ -1197,7 +1692,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹¹ 7s²",
     title: "Einsteinium (Es) - Tribute to a Genius",
     description:
-      "Einsteinium is a synthetic element named after Albert Einstein. It was discovered in the debris of the first hydrogen bomb explosion. It is highly radioactive and has only ever been produced in tiny amounts, used solely for scientific research.",
+      "Einsteinium is a synthetic element named in honor of Albert Einstein. It was discovered unexpectedly in the debris of the first hydrogen bomb explosion in 1952. It is highly radioactive and has only ever been produced in tiny, sub-microgram amounts. Its extreme radioactivity and difficulty of production mean it is used solely for fundamental scientific research, primarily for creating heavier elements.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1133,
+    boilingPointK: 1269,
   },
   {
     name: "Fermium",
@@ -1209,7 +1709,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹² 7s²",
     title: "Fermium (Fm) - The 100th Element",
     description:
-      "Fermium, the 100th element on the periodic table, is named after Enrico Fermi. Like einsteinium, it was discovered in the fallout of the first hydrogen bomb test. It cannot be created in large quantities and has no applications beyond basic research.",
+      "Fermium, the 100th element on the periodic table, is named after Enrico Fermi, a pioneer of the nuclear age. Like einsteinium, it was discovered in the fallout of the first hydrogen bomb test. It is the heaviest element that can be formed by neutron bombardment of lighter elements, and thus the last element that can be prepared in macroscopic quantities, although none has been prepared yet. It has no applications beyond basic research.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1800,
+    boilingPointK: null,
   },
   {
     name: "Mendelevium",
@@ -1221,7 +1726,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹³ 7s²",
     title: "Mendelevium (Md) - Honoring the Table's Architect",
     description:
-      "Mendelevium is named after Dmitri Mendeleev, the father of the periodic table. It was the first element to be synthesized one atom at a time. It is a highly radioactive synthetic element used only to study its own chemical properties.",
+      "Mendelevium is named in honor of Dmitri Mendeleev, the Russian chemist who is considered the father of the periodic table. It was the first element to be synthesized one atom at a time by bombarding einsteinium with alpha particles. It is a highly radioactive synthetic element used only to study its own chemical properties and the limits of the periodic table.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1100,
+    boilingPointK: null,
   },
   {
     name: "Nobelium",
@@ -1233,7 +1743,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 7s²",
     title: "Nobelium (No) - Named for Nobel",
     description:
-      "Nobelium is a synthetic element named in honor of Alfred Nobel. Its discovery was complex and claimed by multiple labs. It is a transuranic element whose chemical properties are still being explored, one atom at a time.",
+      "Nobelium is a synthetic element named in honor of Alfred Nobel, the inventor of dynamite and founder of the Nobel Prize. Its discovery was complex and claimed by multiple labs over many years. It is a transuranic element whose chemical properties, which can only be studied one atom at a time, are still being explored to understand the behavior of heavy actinides.",
+    group: -1,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1100,
+    boilingPointK: null,
   },
   {
     name: "Lawrencium",
@@ -1245,7 +1760,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 7s² 7p¹",
     title: "Lawrencium (Lr) - The Final Actinide",
     description:
-      "Lawrencium is a synthetic radioactive element and the final member of the actinide series. It is named after Ernest Lawrence, inventor of the cyclotron particle accelerator. Its chemical properties are difficult to study due to its extremely short half-life.",
+      "Lawrencium is a synthetic radioactive element and the final member of the actinide series. It is named after Ernest Lawrence, inventor of the cyclotron particle accelerator which was crucial for discovering many synthetic elements. Its chemical properties are difficult to study due to its extremely short half-life (a few hours at most), but it's important for understanding the transition to the transactinide elements.",
+    group: 3,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 1900,
+    boilingPointK: null,
   },
   {
     name: "Rutherfordium",
@@ -1257,7 +1777,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d² 7s²",
     title: "Rutherfordium (Rf) - The First Transactinide",
     description:
-      "Rutherfordium is the first transactinide element, named after Ernest Rutherford. It is a highly radioactive, synthetic element whose properties are predicted to be similar to hafnium. Only a few hundred atoms have ever been made.",
+      "Rutherfordium is the first transactinide element and is named after New Zealand physicist Ernest Rutherford. It is a highly radioactive, synthetic element whose properties are predicted to be similar to hafnium, the element above it in the periodic table. Only a few hundred atoms have ever been made, and they decay within minutes, limiting its study to its fundamental nuclear and atomic properties.",
+    group: 4,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 2400,
+    boilingPointK: 5800,
   },
   {
     name: "Dubnium",
@@ -1269,7 +1794,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d³ 7s²",
     title: "Dubnium (Db) - From the Joint Institute",
     description:
-      "Dubnium is a synthetic element named after Dubna, Russia, home of the Joint Institute for Nuclear Research. It is extremely unstable, with its most stable isotope having a half-life of just over a day. It has no uses outside of research.",
+      "Dubnium is a synthetic element named after Dubna, Russia, home of the Joint Institute for Nuclear Research where it was first synthesized. It is extremely unstable, with its most stable isotope having a half-life of just over a day. Its chemical properties are difficult to determine but are predicted to be similar to tantalum. It has no practical uses outside of research.",
+    group: 5,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
   {
     name: "Seaborgium",
@@ -1281,7 +1811,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d⁴ 7s²",
     title: "Seaborgium (Sg) - Named for a Living Person",
     description:
-      "Seaborgium is a synthetic element named after Glenn T. Seaborg, a key figure in synthesizing many transuranic elements. It was the first element to be named after a living person. Its chemistry is predicted to resemble tungsten.",
+      "Seaborgium is a synthetic element named in honor of Glenn T. Seaborg, a key figure in synthesizing ten transuranic elements. It caused controversy by being the first element to be named after a living person. As a group 6 element, its chemistry is predicted to resemble tungsten. Its most stable isotope has a half-life of several minutes, allowing for limited chemical experiments.",
+    group: 6,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
   {
     name: "Bohrium",
@@ -1293,7 +1828,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d⁵ 7s²",
     title: "Bohrium (Bh) - Honoring Niels Bohr",
     description:
-      "Bohrium is a synthetic element named in honor of Niels Bohr, a pioneer of quantum mechanics. It is a superheavy element whose most stable known isotope has a half-life of about one minute. It is expected to behave like other group 7 elements.",
+      "Bohrium is a synthetic element named in honor of Niels Bohr, a Danish physicist and a pioneer of quantum mechanics and atomic structure. It is a superheavy element whose most stable known isotope has a half-life of about one minute. It is expected to behave as a typical group 7 element, similar to rhenium, but only a few atoms have ever been created for study.",
+    group: 7,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
   {
     name: "Hassium",
@@ -1305,7 +1845,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d⁶ 7s²",
     title: "Hassium (Hs) - From Hesse, Germany",
     description:
-      "Hassium is named after the German state of Hesse, where it was first synthesized. It is a synthetic, radioactive element with chemical properties predicted to be similar to osmium. Its most stable isotope has a half-life of about 10 seconds.",
+      "Hassium is named after the German state of Hesse, where it was first synthesized at the GSI Helmholtz Centre for Heavy Ion Research. It is a synthetic, radioactive element with chemical properties predicted to be similar to osmium, its lighter homologue in group 8. Its most stable known isotope has a half-life of about 10 seconds, making detailed study exceptionally challenging.",
+    group: 8,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
   {
     name: "Meitnerium",
@@ -1317,7 +1862,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d⁷ 7s²",
     title: "Meitnerium (Mt) - Honoring Lise Meitner",
     description:
-      "Meitnerium is a synthetic element named to honor Lise Meitner, a physicist who was a key part of the team that discovered nuclear fission. It is an extremely radioactive element of which only a few atoms have ever been synthesized.",
+      "Meitnerium is a synthetic element named to honor Lise Meitner, an Austrian-Swedish physicist who was a key part of the team that discovered nuclear fission but was overlooked for the Nobel Prize. It is an extremely radioactive element of which only a few atoms have ever been synthesized. It is expected to share properties with iridium.",
+    group: 9,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
   {
     name: "Darmstadtium",
@@ -1329,7 +1879,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d⁸ 7s²",
     title: "Darmstadtium (Ds) - The GSI Element",
     description:
-      "Darmstadtium is named after Darmstadt, Germany, the city where it was created at the GSI Helmholtz Centre for Heavy Ion Research. It is a synthetic, super-heavy element with properties expected to be similar to platinum.",
+      "Darmstadtium is named after Darmstadt, Germany, the city where it was created at the GSI Helmholtz Centre for Heavy Ion Research. It is a synthetic, super-heavy element whose most stable isotope has a half-life of a few seconds. It is predicted to be a noble metal with properties similar to platinum, but its extreme instability and rarity prevent any practical use.",
+    group: 10,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
   {
     name: "Roentgenium",
@@ -1341,7 +1896,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d⁹ 7s²",
     title: "Roentgenium (Rg) - For the Discoverer of X-rays",
     description:
-      "Roentgenium is a synthetic element named in honor of Wilhelm Conrad Röntgen, the discoverer of X-rays. It is extremely unstable, and its most stable known isotope has a half-life of about 26 seconds. It is predicted to be a noble metal like gold.",
+      "Roentgenium is a synthetic element named in honor of Wilhelm Conrad Röntgen, the German physicist who discovered X-rays. It is extremely unstable, and its most stable known isotope has a half-life of about 26 seconds. It is predicted to be a very heavy, noble metal similar to gold. All that is known about it comes from theoretical calculations and the properties of lighter homologs.",
+    group: 11,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
   {
     name: "Copernicium",
@@ -1353,7 +1913,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d¹⁰ 7s²",
     title: "Copernicium (Cn) - Honoring Copernicus",
     description:
-      "Copernicium is a synthetic element named after the astronomer Nicolaus Copernicus. It is a super-heavy element that is extremely volatile for its mass, with some predictions suggesting it could be a liquid or a gas at room temperature.",
+      "Copernicium is a synthetic element named after the astronomer Nicolaus Copernicus. It is a super-heavy element that is extremely volatile for its mass. Early experiments suggest it has properties similar to mercury and may even be a gas at room temperature, which would make it the first gaseous metal. Its most stable isotope has a half-life of about 30 seconds.",
+    group: 12,
+    period: 7,
+    stateAtSTP: "Gas",
+    meltingPointK: null,
+    boilingPointK: 357,
   },
   {
     name: "Nihonium",
@@ -1365,7 +1930,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p¹",
     title: "Nihonium (Nh) - From Japan",
     description:
-      "Nihonium is a synthetic element named after the Japanese word for Japan, 'Nihon'. It was the first modern element to be discovered in an Asian country. It is a super-heavy, extremely radioactive element whose properties are largely unknown.",
+      "Nihonium is a synthetic element named after the Japanese word for Japan, 'Nihon'. It holds the distinction of being the first modern element to be synthesized in an Asian country (at the RIKEN laboratory). It is a super-heavy, extremely radioactive element whose properties are largely unknown but are predicted to be similar to other group 13 elements like thallium.",
+    group: 13,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 700,
+    boilingPointK: 1430,
   },
   {
     name: "Flerovium",
@@ -1377,7 +1947,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²",
     title: "Flerovium (Fl) - From the Flerov Laboratory",
     description:
-      "Flerovium is named after the Flerov Laboratory of Nuclear Reactions in Dubna, Russia. It is a super-heavy synthetic element located in an 'island of stability,' a theoretical region where super-heavy elements are predicted to have longer half-lives.",
+      "Flerovium is named after the Flerov Laboratory of Nuclear Reactions in Dubna, Russia, and its founder Georgy Flyorov. It is a super-heavy synthetic element located near the theoretical 'island of stability,' where super-heavy elements are predicted to have longer half-lives. It is expected to be a volatile metal, possibly showing some noble-gas-like properties.",
+    group: 14,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: 210,
   },
   {
     name: "Moscovium",
@@ -1389,7 +1964,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³",
     title: "Moscovium (Mc) - From the Moscow Oblast",
     description:
-      "Moscovium is a synthetic, super-heavy element named for the Moscow Oblast, where the Joint Institute for Nuclear Research is located. It is extremely radioactive, and its limited production precludes any use outside of scientific study.",
+      "Moscovium is a synthetic, super-heavy element named for the Moscow Oblast, where the Joint Institute for Nuclear Research (JINR) is located. It was created in collaboration between Russian and American scientists. It is extremely radioactive, with a half-life of less than a second, and its limited production precludes any use outside of fundamental scientific study of heavy nuclei.",
+    group: 15,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: 700,
+    boilingPointK: 1400,
   },
   {
     name: "Livermorium",
@@ -1401,7 +1981,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴",
     title: "Livermorium (Lv) - A Collaborative Discovery",
     description:
-      "Livermorium is named after the Lawrence Livermore National Laboratory in California, which collaborated with Russian scientists on its discovery. It is a synthetic, super-heavy element with a half-life measured in tens of milliseconds.",
+      "Livermorium is named after the Lawrence Livermore National Laboratory in California, which collaborated with the JINR in Dubna, Russia, on its discovery. It is a synthetic, super-heavy element with a half-life measured in tens of milliseconds. It is predicted to be a chalcogen, similar to polonium, but its properties are based entirely on theoretical calculations.",
+    group: 16,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
   {
     name: "Tennessine",
@@ -1413,7 +1998,12 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵",
     title: "Tennessine (Ts) - Honoring Tennessee",
     description:
-      "Tennessine is a synthetic super-heavy element named to honor the state of Tennessee, home to several key research laboratories. As a member of group 17, it is predicted to be a halogen, though its properties may differ significantly from lighter halogens.",
+      "Tennessine is a synthetic super-heavy element named to honor the state of Tennessee, home to several key research laboratories like Oak Ridge National Laboratory. As a member of group 17, it is predicted to be a halogen, though its properties may differ significantly from lighter halogens, possibly exhibiting more metallic character. It is the second-heaviest element created to date.",
+    group: 17,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: 883,
   },
   {
     name: "Oganesson",
@@ -1425,6 +2015,11 @@ export const elements: ElementConfig[] = [
     electronConfiguration: "[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶",
     title: "Oganesson (Og) - The Heaviest Element",
     description:
-      "Oganesson is the element with the highest atomic number and atomic mass ever synthesized. It is named after Yuri Oganessian for his pioneering research in super-heavy elements. Though in group 18, it may not be a noble gas and is predicted to be a solid semiconductor at room temperature.",
+      "Oganesson is the element with the highest atomic number and atomic mass ever synthesized. It is named after Yuri Oganessian for his pioneering research in super-heavy elements. Though located in group 18 with the noble gases, due to extreme relativistic effects, it is predicted to be chemically reactive and a solid semiconductor at room temperature, challenging the definition of its group.",
+    group: 18,
+    period: 7,
+    stateAtSTP: "Solid",
+    meltingPointK: null,
+    boilingPointK: null,
   },
 ];

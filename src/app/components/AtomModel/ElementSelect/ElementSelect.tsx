@@ -87,7 +87,7 @@ export const ElementSelect = ({
           onMouseLeave={stopChangingElement}
           title="Previous element"
         >
-          ▲
+          ▼
         </button>
         <button
           className={styles.elementNavButton}
@@ -96,7 +96,7 @@ export const ElementSelect = ({
           onMouseLeave={stopChangingElement}
           title="Next element"
         >
-          ▼
+          ▲
         </button>
       </div>
     </div>
