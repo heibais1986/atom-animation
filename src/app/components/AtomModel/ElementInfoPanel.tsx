@@ -8,13 +8,16 @@ import { ElementConfig } from "./elements";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
-// Propsy są teraz proste - tylko element i pozycja
+// Uproszczony typ - bez zbędnych propsów
 type ElementInfoPanelProps = {
   element: ElementConfig;
   position: { x: number; y: number };
 };
 
-export const ElementInfoPanel = ({ element, position }: ElementInfoPanelProps) => {
+export const ElementInfoPanel = ({
+  element,
+  position,
+}: ElementInfoPanelProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -36,9 +39,15 @@ export const ElementInfoPanel = ({ element, position }: ElementInfoPanelProps) =
     description: "Brak dodatkowych informacji dla tego pierwiastka.",
   };
 
-  // Usunęliśmy onMouseDown z tego diva. Logika jest teraz w 100% w AtomModel.tsx
   const panelContent = (
-    <div ref={setNodeRef} className={styles.panel} style={style}>
+    <div
+      ref={setNodeRef}
+      className={styles.panel}
+      style={style}
+      // OSTATECZNA POPRAWKA: Zatrzymujemy zdarzenie `mousedown` na samym panelu.
+      // To zapobiega jego "bąbelkowaniu" do `window` i uruchomieniu logiki zamykania.
+      onMouseDown={(e) => e.stopPropagation()}
+    >
       <div className={styles.header} {...listeners} {...attributes}>
         <h3 className={styles.title}>{info.title}</h3>
       </div>

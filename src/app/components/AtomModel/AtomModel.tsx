@@ -4,9 +4,12 @@ import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+
 import styles from "./AtomModel.module.css";
 import { useAtomModel } from "./useAtomModel";
 import { ElementInfoPanel } from "./ElementInfoPanel";
+import { RefreshButton } from "../RefreshButton/RefreshButton"; // Import przycisku
 import {
   DndContext,
   PointerSensor,
@@ -49,7 +52,7 @@ const KeyboardRotator = ({
 const CONFIG = {
   modelScale: 1.35,
   initialRotation: new THREE.Euler(Math.PI / 4, Math.PI / 0.6, 0),
-  cameraPosition: new THREE.Vector3(0, 4, 12),
+  cameraPosition: new THREE.Vector3(0, 5.6, 16.8),
   cameraFov: 50,
   ambientLightIntensity: 0.7,
   directionalLightIntensity: 1,
@@ -202,6 +205,7 @@ export const AtomModel = () => {
     useAtomModel();
 
   const modelGroupRef = useRef<THREE.Group>(null!);
+  const controlsRef = useRef<OrbitControlsImpl>(null!); // Ref do resetowania kamery
   const rotationState = useRef({
     up: false,
     down: false,
@@ -219,28 +223,35 @@ export const AtomModel = () => {
         return;
       }
 
-      event.preventDefault();
       switch (event.key) {
         case "ArrowUp":
+          event.preventDefault(); // Przeniesione tutaj
           rotationState.current.up = isDown;
           break;
         case "ArrowDown":
+          event.preventDefault(); // Przeniesione tutaj
           rotationState.current.down = isDown;
           break;
         case "ArrowLeft":
+          event.preventDefault(); // Przeniesione tutaj
           rotationState.current.left = isDown;
           break;
         case "ArrowRight":
+          event.preventDefault(); // Przeniesione tutaj
           rotationState.current.right = isDown;
           break;
         default:
+          // Dla innych klawiszy (jak F5) nic nie robimy i nie blokujemy domyślnej akcji.
           return;
       }
     };
+
     const handleKeyDown = (e: KeyboardEvent) => handleKey(e, true);
     const handleKeyUp = (e: KeyboardEvent) => handleKey(e, false);
+
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
@@ -249,7 +260,6 @@ export const AtomModel = () => {
 
   const [isPanelVisible, setIsPanelVisible] = useState(false);
   const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
-
   const clickStartPos = useRef<{ x: number; y: number } | null>(null);
   const clickOutsideTracker = useRef<{ x: number; y: number } | null>(null);
 
@@ -274,43 +284,30 @@ export const AtomModel = () => {
     clickStartPos.current = null;
   };
 
-  // Ta wersja `useEffect` jest ostateczna i obsługuje wszystkie przypadki
   useEffect(() => {
     if (!isPanelVisible) return;
-
     const handleMouseDown = (e: MouseEvent) => {
       if (e.button !== 0) return;
-
       const target = e.target as HTMLElement;
-
-      // Używamy selektora CSS, który na pewno znajdzie panel
       const onInfoPanel = target.closest('[class*="ElementInfoPanel_panel"]');
       const onControlsPanel = target.closest(`.${styles.secondRow}`);
-
       if (!onInfoPanel && !onControlsPanel) {
         clickOutsideTracker.current = { x: e.clientX, y: e.clientY };
       }
     };
-
     const handleMouseUp = (e: MouseEvent) => {
       if (e.button !== 0) return;
-
       if (clickOutsideTracker.current) {
         const dist = Math.sqrt(
           (e.clientX - clickOutsideTracker.current.x) ** 2 +
             (e.clientY - clickOutsideTracker.current.y) ** 2
         );
-
-        if (dist < 5) {
-          setIsPanelVisible(false);
-        }
+        if (dist < 5) setIsPanelVisible(false);
       }
       clickOutsideTracker.current = null;
     };
-
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
-
     return () => {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
@@ -333,6 +330,28 @@ export const AtomModel = () => {
     }));
   };
 
+  // --- NOWA FUNKCJA DO RESETOWANIA STANU ---
+  const handleRefresh = () => {
+    // NIE resetujemy już pierwiastka ani suwaka
+
+    // Resetuj rotację modelu do wartości początkowej
+    if (modelGroupRef.current) {
+      modelGroupRef.current.rotation.set(
+        CONFIG.initialRotation.x,
+        CONFIG.initialRotation.y,
+        CONFIG.initialRotation.z
+      );
+    }
+
+    // Resetuj pozycję i zoom kamery do wartości początkowej
+    if (controlsRef.current) {
+      controlsRef.current.reset();
+    }
+
+    // Zamknij panel informacyjny, jeśli jest otwarty
+    setIsPanelVisible(false);
+  };
+
   const speedMultiplier = (sliderValue / CONFIG.sliderMidpoint) ** 2;
   const shellDistances = useMemo(
     () => CONFIG.shellDistances.map((d) => d * CONFIG.modelScale),
@@ -352,6 +371,9 @@ export const AtomModel = () => {
 
   return (
     <div className={styles.mainContainer} onPointerDown={handlePointerDown}>
+      {/* Przycisk renderowany na głównym kontenerze */}
+      <RefreshButton onClick={handleRefresh} />
+
       <div className={styles.animationContainer}>
         <Canvas
           onContextMenu={handleContextMenu}
@@ -383,7 +405,8 @@ export const AtomModel = () => {
               );
             })}
           </group>
-          <OrbitControls enableZoom enablePan />
+          {/* Ponownie dodajemy ref do OrbitControls */}
+          <OrbitControls ref={controlsRef} enableZoom enablePan />
           <KeyboardRotator
             modelGroupRef={modelGroupRef}
             rotationState={rotationState}
@@ -447,7 +470,6 @@ export const AtomModel = () => {
 
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         {isPanelVisible && (
-          // Usunęliśmy propa isPointerDownOnPanelRef, bo nie jest już potrzebny
           <ElementInfoPanel element={element} position={panelPosition} />
         )}
       </DndContext>
