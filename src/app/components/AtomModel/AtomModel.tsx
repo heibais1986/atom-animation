@@ -9,7 +9,7 @@ import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import styles from "./AtomModel.module.css";
 import { useAtomModel } from "./useAtomModel";
 import { ElementInfoPanel } from "./ElementInfoPanel";
-import { RefreshButton } from "../RefreshButton/RefreshButton"; // Import przycisku
+import { RefreshButton } from "../RefreshButton/RefreshButton";
 import {
   DndContext,
   PointerSensor,
@@ -57,7 +57,7 @@ const CONFIG = {
   ambientLightIntensity: 0.7,
   directionalLightIntensity: 1,
   directionalLightPosition: new THREE.Vector3(10, 10, 5),
-  protonColor: "#ff4136",
+  protonColor: "#ff554d",
   neutronColor: "#aaaaaa",
   nucleonBaseRadius: 0.2,
   nucleonDetail: 32,
@@ -74,6 +74,7 @@ const CONFIG = {
   speedConstant: 1.5 * Math.PI,
   sliderMidpoint: 50,
 };
+
 const Nucleus = ({
   protons,
   neutrons,
@@ -205,7 +206,7 @@ export const AtomModel = () => {
     useAtomModel();
 
   const modelGroupRef = useRef<THREE.Group>(null!);
-  const controlsRef = useRef<OrbitControlsImpl>(null!); // Ref do resetowania kamery
+  const controlsRef = useRef<OrbitControlsImpl>(null!);
   const rotationState = useRef({
     up: false,
     down: false,
@@ -213,6 +214,7 @@ export const AtomModel = () => {
     right: false,
   });
   const isSelectFocused = useRef(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent, isDown: boolean) => {
@@ -225,23 +227,22 @@ export const AtomModel = () => {
 
       switch (event.key) {
         case "ArrowUp":
-          event.preventDefault(); // Przeniesione tutaj
+          event.preventDefault();
           rotationState.current.up = isDown;
           break;
         case "ArrowDown":
-          event.preventDefault(); // Przeniesione tutaj
+          event.preventDefault();
           rotationState.current.down = isDown;
           break;
         case "ArrowLeft":
-          event.preventDefault(); // Przeniesione tutaj
+          event.preventDefault();
           rotationState.current.left = isDown;
           break;
         case "ArrowRight":
-          event.preventDefault(); // Przeniesione tutaj
+          event.preventDefault();
           rotationState.current.right = isDown;
           break;
         default:
-          // Dla innych klawiszy (jak F5) nic nie robimy i nie blokujemy domyślnej akcji.
           return;
       }
     };
@@ -255,6 +256,9 @@ export const AtomModel = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, []);
 
@@ -330,11 +334,7 @@ export const AtomModel = () => {
     }));
   };
 
-  // --- NOWA FUNKCJA DO RESETOWANIA STANU ---
   const handleRefresh = () => {
-    // NIE resetujemy już pierwiastka ani suwaka
-
-    // Resetuj rotację modelu do wartości początkowej
     if (modelGroupRef.current) {
       modelGroupRef.current.rotation.set(
         CONFIG.initialRotation.x,
@@ -342,14 +342,45 @@ export const AtomModel = () => {
         CONFIG.initialRotation.z
       );
     }
-
-    // Resetuj pozycję i zoom kamery do wartości początkowej
     if (controlsRef.current) {
       controlsRef.current.reset();
     }
-
-    // Zamknij panel informacyjny, jeśli jest otwarty
     setIsPanelVisible(false);
+  };
+
+  const handleNextElement = () => {
+    setSelectedElement((currentElementName) => {
+      const currentIndex = elements.findIndex(
+        (el) => el.name === currentElementName
+      );
+      const nextIndex = (currentIndex + 1) % elements.length;
+      return elements[nextIndex].name;
+    });
+  };
+
+  const handlePreviousElement = () => {
+    setSelectedElement((currentElementName) => {
+      const currentIndex = elements.findIndex(
+        (el) => el.name === currentElementName
+      );
+      const prevIndex = (currentIndex - 1 + elements.length) % elements.length;
+      return elements[prevIndex].name;
+    });
+  };
+
+  const startChangingElement = (direction: "up" | "down") => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    const changeFunction =
+      direction === "up" ? handlePreviousElement : handleNextElement;
+    changeFunction();
+    intervalRef.current = setInterval(changeFunction, 100);
+  };
+
+  const stopChangingElement = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
   };
 
   const speedMultiplier = (sliderValue / CONFIG.sliderMidpoint) ** 2;
@@ -368,10 +399,10 @@ export const AtomModel = () => {
     });
   }, [element]);
   const electronCount = element.shells.reduce((a, b) => a + b, 0);
+  const massNumber = element.protons + element.neutrons;
 
   return (
     <div className={styles.mainContainer} onPointerDown={handlePointerDown}>
-      {/* Przycisk renderowany na głównym kontenerze */}
       <RefreshButton onClick={handleRefresh} />
 
       <div className={styles.animationContainer}>
@@ -405,7 +436,6 @@ export const AtomModel = () => {
               );
             })}
           </group>
-          {/* Ponownie dodajemy ref do OrbitControls */}
           <OrbitControls ref={controlsRef} enableZoom enablePan />
           <KeyboardRotator
             modelGroupRef={modelGroupRef}
@@ -414,56 +444,82 @@ export const AtomModel = () => {
         </Canvas>
       </div>
       <div className={styles.secondRow}>
-        <div className={styles.legend}>
-          <div className={styles.legendItem}>
-            <div
-              className={styles.colorIndicator}
-              style={{ backgroundColor: CONFIG.protonColor }}
-            />
-            <span>{`Protons (${element.protons})`}</span>
-          </div>
-          <div className={styles.legendItem}>
-            <div
-              className={styles.colorIndicator}
-              style={{ backgroundColor: CONFIG.neutronColor }}
-            />
-            <span>{`Neutrons (${element.neutrons})`}</span>
-          </div>
-          <div className={styles.legendItem}>
-            <div
-              className={styles.colorIndicator}
-              style={{ backgroundColor: CONFIG.electronColor }}
-            />
-            <span>{`Electrons (${electronCount})`}</span>
-          </div>
+        <div className={styles.elementDisplay}>
+          <div className={styles.atomicNumber}>{element.protons}</div>
+          <div className={styles.elementSymbol}>{element.symbol}</div>
+          <div className={styles.elementName}>{element.name}</div>
+          <div className={styles.atomicMass}>{massNumber}</div>
         </div>
-        <div className={styles.controls}>
-          <div className={styles.controlGroup}>
-            <label htmlFor="element">Element:</label>
-            <select
-              id="element"
-              value={element.name}
-              onChange={(e) => setSelectedElement(e.target.value)}
-              onFocus={() => (isSelectFocused.current = true)}
-              onBlur={() => (isSelectFocused.current = false)}
-            >
-              {elements.map((el) => (
-                <option key={el.name} value={el.name}>
-                  {el.name}
-                </option>
-              ))}
-            </select>
+        <div className={styles.rightPanel}>
+          <div className={styles.controlsRow}>
+            <div className={styles.controlGroup}>
+              <label htmlFor="element">Element:</label>
+              <select
+                id="element"
+                value={element.name}
+                onChange={(e) => setSelectedElement(e.target.value)}
+                onFocus={() => (isSelectFocused.current = true)}
+                onBlur={() => (isSelectFocused.current = false)}
+              >
+                {elements.map((el) => (
+                  <option key={el.name} value={el.name}>
+                    {el.name}
+                  </option>
+                ))}
+              </select>
+              <button
+                className={styles.elementNavButton}
+                onMouseDown={() => startChangingElement("up")}
+                onMouseUp={stopChangingElement}
+                onMouseLeave={stopChangingElement}
+                title="Previous element"
+              >
+                &#9650;
+              </button>
+              <button
+                className={styles.elementNavButton}
+                onMouseDown={() => startChangingElement("down")}
+                onMouseUp={stopChangingElement}
+                onMouseLeave={stopChangingElement}
+                title="Next element"
+              >
+                &#9660;
+              </button>
+            </div>
+            <div className={styles.controlGroup}>
+              <label htmlFor="speed">Speed:</label>
+              <input
+                id="speed"
+                type="range"
+                min={1}
+                max={100}
+                value={sliderValue}
+                onChange={(e) => setSliderValue(Number(e.target.value))}
+              />
+            </div>
           </div>
-          <div className={styles.controlGroup}>
-            <label htmlFor="speed">Speed:</label>
-            <input
-              id="speed"
-              type="range"
-              min={1}
-              max={100}
-              value={sliderValue}
-              onChange={(e) => setSliderValue(Number(e.target.value))}
-            />
+          <div className={styles.legend}>
+            <div className={styles.legendItem}>
+              <div
+                className={styles.colorIndicator}
+                style={{ backgroundColor: CONFIG.protonColor }}
+              />
+              <span>{`Protons (${element.protons})`}</span>
+            </div>
+            <div className={styles.legendItem}>
+              <div
+                className={styles.colorIndicator}
+                style={{ backgroundColor: CONFIG.neutronColor }}
+              />
+              <span>{`Neutrons (${element.neutrons})`}</span>
+            </div>
+            <div className={styles.legendItem}>
+              <div
+                className={styles.colorIndicator}
+                style={{ backgroundColor: CONFIG.electronColor }}
+              />
+              <span>{`Electrons (${electronCount})`}</span>
+            </div>
           </div>
         </div>
       </div>

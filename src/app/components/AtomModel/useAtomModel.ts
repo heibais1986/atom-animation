@@ -1,13 +1,15 @@
+// Plik: useAtomModel.ts
+
 import { useState } from "react";
-import { elements } from "./elements";
+import { elements } from "./elements"; // Importujemy nową, zunifikowaną listę
 
 export const useAtomModel = () => {
   const [sliderValue, setSliderValue] = useState(50);
-  const [selectedName, setSelectedElement] = useState("Magnesium");
+  // Zaczynamy od Tlenu, żeby od razu widzieć efekt
+  const [selectedName, setSelectedElement] = useState("Oxygen"); 
 
   const element = elements.find((el) => el.name === selectedName)!;
 
-  // Powrót do prostej wersji - bez obsługi klawiatury w tym hooku
   return {
     elements,
     element,
