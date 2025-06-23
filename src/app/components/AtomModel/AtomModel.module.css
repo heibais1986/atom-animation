@@ -5,7 +5,6 @@
   color: white;
   background: transparent;
   font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
 }
 
 .animationContainer {
@@ -26,7 +25,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1.7rem;
+  gap: 1.2rem;
   min-width: fit-content;
   height: 9rem;
 }
@@ -36,7 +35,7 @@
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 10px;
-  border: 1px solid rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.15);
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
   display: flex;
@@ -46,7 +45,6 @@
   gap: 1rem;
   transition: all 0.4s ease;
   position: relative;
-  overflow: hidden;
   backdrop-filter: blur(15px);
   height: 100%;
 }
@@ -112,71 +110,6 @@
   color: rgba(248, 250, 252, 0.9);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   letter-spacing: 0.025em;
-}
-
-.rightPanel select {
-  height: 42px;
-  width: 180px;
-  padding: 0 16px;
-  margin-right: 1rem;
-  border-radius: 6px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgb(255, 255, 255, 0.02);
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-sizing: border-box;
-
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-}
-
-.rightPanel select:hover {
-  border-color: rgba(56, 210, 248, 0.4);
-}
-
-.rightPanel select:focus {
-  border-color: rgba(56, 210, 248, 0.4);
-}
-
-.elementNavButton {
-  width: 42px;
-  height: 42px;
-  padding: 0;
-  background: rgb(255, 255, 255, 0.02);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  transition: 0.2s;
-}
-
-.elementNavButton:first-of-type {
-  margin-left: -14px;
-  border-right: 1px solid rgba(148, 163, 184, 0.1);
-}
-
-.elementNavButton:last-of-type {
-  margin-left: -2px;
-}
-
-.elementNavButton:hover {
-  border-color: rgba(56, 210, 248, 0.4);
-}
-
-.elementNavButton:active {
-  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 }
 
 .rightPanel input[type="range"] {
@@ -268,9 +201,7 @@
   background: rgba(255, 255, 255, 0.03);
   box-sizing: border-box;
   border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset; */
+  border: 1px solid rgba(148, 163, 184, 0.15);
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
   backdrop-filter: blur(15px);
@@ -373,7 +304,6 @@
   .elementSymbol {
     font-size: 2.8rem;
   }
-  .rightPanel select,
   .rightPanel input[type="range"] {
     width: 160px;
   }

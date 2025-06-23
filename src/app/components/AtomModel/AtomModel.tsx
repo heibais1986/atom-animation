@@ -10,6 +10,7 @@ import styles from "./AtomModel.module.css";
 import { useAtomModel } from "./useAtomModel";
 import { ElementInfoPanel } from "./ElementInfoPanel";
 import { RefreshButton } from "../RefreshButton/RefreshButton";
+import { ElementSelect } from "./ElementSelect/ElementSelect";
 import {
   DndContext,
   PointerSensor,
@@ -158,6 +159,7 @@ const Nucleus = ({
     </group>
   );
 };
+
 const Electron = ({ radius, speed }: { radius: number; speed: number }) => {
   const ref = useRef<THREE.Mesh>(null!);
   const angle = useRef(Math.random() * Math.PI * 2);
@@ -183,6 +185,7 @@ const Electron = ({ radius, speed }: { radius: number; speed: number }) => {
     </mesh>
   );
 };
+
 const OrbitRing = ({ radius }: { radius: number }) => (
   <mesh>
     <ringGeometry
@@ -214,8 +217,6 @@ export const AtomModel = () => {
     right: false,
   });
   const isSelectFocused = useRef(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
   const speedSliderRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -231,7 +232,6 @@ export const AtomModel = () => {
     };
 
     updateSliderFill();
-
     const slider = speedSliderRef.current;
     slider?.addEventListener("input", updateSliderFill);
 
@@ -280,9 +280,6 @@ export const AtomModel = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
     };
   }, []);
 
@@ -372,41 +369,6 @@ export const AtomModel = () => {
     setIsPanelVisible(false);
   };
 
-  const handleNextElement = () => {
-    setSelectedElement((currentElementName) => {
-      const currentIndex = elements.findIndex(
-        (el) => el.name === currentElementName
-      );
-      const nextIndex = (currentIndex + 1) % elements.length;
-      return elements[nextIndex].name;
-    });
-  };
-
-  const handlePreviousElement = () => {
-    setSelectedElement((currentElementName) => {
-      const currentIndex = elements.findIndex(
-        (el) => el.name === currentElementName
-      );
-      const prevIndex = (currentIndex - 1 + elements.length) % elements.length;
-      return elements[prevIndex].name;
-    });
-  };
-
-  const startChangingElement = (direction: "up" | "down") => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    const changeFunction =
-      direction === "up" ? handlePreviousElement : handleNextElement;
-    changeFunction();
-    intervalRef.current = setInterval(changeFunction, 100);
-  };
-
-  const stopChangingElement = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  };
-
   const speedMultiplier = (sliderValue / CONFIG.sliderMidpoint) ** 2;
   const shellDistances = useMemo(
     () => CONFIG.shellDistances.map((d) => d * CONFIG.modelScale),
@@ -486,40 +448,12 @@ export const AtomModel = () => {
         </div>
         <div className={styles.rightPanel}>
           <div className={styles.controlsRow}>
-            <div className={styles.controlGroup}>
-              <label htmlFor="element">Element:</label>
-              <select
-                id="element"
-                value={element.name}
-                onChange={(e) => setSelectedElement(e.target.value)}
-                onFocus={() => (isSelectFocused.current = true)}
-                onBlur={() => (isSelectFocused.current = false)}
-              >
-                {elements.map((el) => (
-                  <option key={el.name} value={el.name}>
-                    {el.name}
-                  </option>
-                ))}
-              </select>
-              <button
-                className={styles.elementNavButton}
-                onMouseDown={() => startChangingElement("up")}
-                onMouseUp={stopChangingElement}
-                onMouseLeave={stopChangingElement}
-                title="Previous element"
-              >
-                &#9650;
-              </button>
-              <button
-                className={styles.elementNavButton}
-                onMouseDown={() => startChangingElement("down")}
-                onMouseUp={stopChangingElement}
-                onMouseLeave={stopChangingElement}
-                title="Next element"
-              >
-                &#9660;
-              </button>
-            </div>
+            <ElementSelect
+              elements={elements}
+              selectedElementName={element.name}
+              setSelectedElement={setSelectedElement}
+              isSelectFocused={isSelectFocused}
+            />
             <div className={styles.controlGroup} id="speed-control-group">
               <label htmlFor="speed">Speed:</label>
               <input
