@@ -1,0 +1,104 @@
+/* --- GŁÓWNY KONTENER --- */
+/* Zmiana #1: Ustawiamy pozycjonowanie względne, 
+   aby stał się kontekstem dla absolutnie pozycjonowanych dzieci. */
+/* --- GŁÓWNY KONTENER --- */
+.mainContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: transparent; /* To jest ważne, aby tło było przezroczyste */
+  font-family: sans-serif;
+  overflow: hidden;
+
+  /* --- NOWA LINIA --- */
+  /* Nakładamy filtr, który rozmyje wszystko, co jest za tym kontenerem */
+ 
+}
+
+/* --- KONTENER Z PŁÓTNEM 3D --- */
+/* Zmiana #2: Rozciągamy go na CAŁY ekran rodzica (mainContainer).
+   Będzie on dolną warstwą. */
+.animationContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Warstwa tła */
+}
+
+/* --- PANEL UI (LEGENDA I KONTROLKI) --- */
+/* Zmiana #3: Pozycjonujemy go absolutnie, "zawieszając" na dole ekranu.
+   Będzie on górną warstwą. */
+.secondRow {
+  position: absolute;
+  bottom: 2rem; /* Odstęp od dolnej krawędzi */
+  left: 50%;
+  transform: translateX(-50%); /* Idealne centrowanie w poziomie */
+  z-index: 2; /* Warstwa interfejsu, nad tłem */
+
+  /* Reszta stylów bez zmian, dla wyglądu */
+  background-color: rgba(40, 40, 40, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 3rem;
+  margin-top: 1rem;
+}
+
+/* --- Reszta stylów, głównie estetycznych - bez zmian --- */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  /* Usunięty margin-top, bo pozycjonowanie jest teraz absolutne */
+  padding: 1rem;
+  padding-inline: 1.5rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorIndicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.controls {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.controls label {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.controls select,
+.controls input[type="range"] {
+  width: 160px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: white;
+}
