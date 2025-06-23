@@ -1,12 +1,9 @@
-// Plik: useAtomModel.ts
-
 import { useState } from "react";
-import { elements } from "./elements"; // Importujemy nową, zunifikowaną listę
+import { elements } from "./elementsData";
 
 export const useAtomModel = () => {
   const [sliderValue, setSliderValue] = useState(50);
-  // Zaczynamy od Tlenu, żeby od razu widzieć efekt
-  const [selectedName, setSelectedElement] = useState("Oxygen"); 
+  const [selectedName, setSelectedElement] = useState("Oxygen");
 
   const element = elements.find((el) => el.name === selectedName)!;
 
