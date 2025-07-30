@@ -15,7 +15,6 @@ import {
 import { useAppStore, useCurrentElement } from "../../store/appStore";
 import { RefreshButton } from "./RefreshButton/RefreshButton";
 import { BottomMenu } from "./BottomMenu/BottomMenu";
-import { SideMenu } from "./SideMenu/SideMenu";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const {
@@ -82,7 +81,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={styles.mainContainer}>
       <RefreshButton onClick={handleRefresh} />
-      <SideMenu />
       <main className={styles.main}> {children}</main>
 
       <BottomMenu />

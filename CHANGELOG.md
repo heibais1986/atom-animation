@@ -18,4 +18,8 @@
 ## 1.0.2 (23-06-2025)
 
 - reorganize elements data
+- redesign element info popup
+- extract layout component
+- extract bottom menu
+- add license
 
