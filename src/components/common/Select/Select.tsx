@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
+
 import styles from "./Select.module.css";
 
 export interface SelectOption {
@@ -25,8 +27,39 @@ export const Select = ({
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLUListElement>(null);
+  const [dropdownRect, setDropdownRect] = useState<DOMRect | null>(null);
 
   const selectedOption = options.find((option) => option.value === value);
+
+  const updateDropdownPosition = useCallback(() => {
+    if (selectRef.current) {
+      const rect = selectRef.current.getBoundingClientRect();
+      setDropdownRect({
+        left: rect.left,
+        top: rect.bottom + 4,
+        width: rect.width,
+        height: 0,
+        x: rect.x,
+        y: rect.y,
+        right: rect.right,
+        bottom: rect.bottom,
+        toJSON: () => ({}),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      updateDropdownPosition();
+      window.addEventListener("resize", updateDropdownPosition);
+      window.addEventListener("scroll", updateDropdownPosition, true);
+    }
+    return () => {
+      window.removeEventListener("resize", updateDropdownPosition);
+      window.removeEventListener("scroll", updateDropdownPosition, true);
+    };
+  }, [isOpen, updateDropdownPosition]);
 
   const handleToggle = () => {
     const nextIsOpen = !isOpen;
@@ -49,7 +82,9 @@ export const Select = ({
       if (
         isOpen &&
         selectRef.current &&
-        !selectRef.current.contains(event.target as Node)
+        !selectRef.current.contains(event.target as Node) &&
+        (!dropdownRef.current ||
+          !dropdownRef.current.contains(event.target as Node))
       ) {
         setIsOpen(false);
         onBlur?.();
@@ -71,19 +106,34 @@ export const Select = ({
         <span>{selectedOption?.label || ""}</span>
         <span className={styles.arrow}>▼</span>
       </div>
-      {isOpen && (
-        <ul className={styles.selectDropdown}>
-          {options.map((option) => (
-            <li
-              key={option.value}
-              className={styles.selectOption}
-              onClick={() => handleOptionClick(option.value)}
-            >
-              {option.label}
-            </li>
-          ))}
-        </ul>
-      )}
+
+      {isOpen &&
+        dropdownRect &&
+        createPortal(
+          <div
+            className={styles.dropdownPortalWrapper}
+            style={{
+              position: "fixed",
+              left: `${dropdownRect.left}px`,
+              top: `${dropdownRect.top}px`,
+              width: `${dropdownRect.width}px`,
+              zIndex: 999999,
+            }}
+          >
+            <ul className={styles.selectDropdown} ref={dropdownRef}>
+              {options.map((option) => (
+                <li
+                  key={option.value}
+                  className={styles.selectOption}
+                  onClick={() => handleOptionClick(option.value)}
+                >
+                  {option.label}
+                </li>
+              ))}
+            </ul>
+          </div>,
+          document.body
+        )}
     </div>
   );
 };
