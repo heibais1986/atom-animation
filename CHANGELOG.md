@@ -15,7 +15,7 @@
 - adjust element display
 - add custom select
 
-## 1.0.2 (23-06-2025)
+## 1.0.2 (24-06-2025)
 
 - reorganize elements data
 - redesign element info popup
@@ -23,3 +23,11 @@
 - extract bottom menu
 - add license
 
+## 1.0.3 (05-08-2025)
+
+- improve element modal
+- update elements data
+- add new icons
+- add favicon
+- improve particle control
+- redesign bottom menu
