@@ -83,3 +83,17 @@
 .mobileModalContainer > * {
   pointer-events: auto;
 }
+
+.languageToggleWrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .languageToggleWrapper {
+    top: 10px;
+    right: 10px;
+  }
+}

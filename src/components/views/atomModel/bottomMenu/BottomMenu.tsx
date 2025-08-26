@@ -9,6 +9,7 @@ import { ElementSelect } from "./elementSelect/ElementSelect";
 import { CONFIG } from "@/components/views/atomModel/AtomModel";
 import { deriveCurrentElement, useAppStore } from "@/store/appStore";
 import { elements } from "@/elementsData/elementsData";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const PARTICLE_LIMIT = 300;
 
@@ -36,6 +37,7 @@ export const BottomMenu = () => {
   } = useAppStore();
   const element = useAppStore(deriveCurrentElement);
   const speedSliderRef = useRef<HTMLInputElement>(null);
+  const { t, translateElementName } = useTranslation();
 
   useEffect(() => {
     const updateSliderFill = () => {
@@ -93,7 +95,7 @@ export const BottomMenu = () => {
               </sup>
             )}
           </div>
-          <div className={styles.elementName}>{element.name}</div>
+          <div className={styles.elementName}>{translateElementName(element.name)}</div>
           <div className={styles.atomicWeight}>{element.atomicWeight}</div>
         </div>
       </div> 
@@ -105,7 +107,7 @@ export const BottomMenu = () => {
             setSelectedElement={handleElementSelection}
           />
           <div className={styles.controlGroup} id="speed-control-group">
-            <label htmlFor="speed">Speed:</label>
+            <label htmlFor="speed">{t.speed}</label>
             <input
               id="speed"
               type="range"
@@ -119,16 +121,16 @@ export const BottomMenu = () => {
               <button
                 className={styles.actionButton}
                 onClick={triggerAtomModelShake}
-                title="Shake Atom"
-                aria-label="Shake Atom"
+                title={t.shakeAtom}
+                aria-label={t.shakeAtom}
               >
                 <ShakeIcon />
               </button>
               <button
                 className={styles.actionButton}
                 onClick={handleRefreshClick}
-                title="Reset View"
-                aria-label="Reset View"
+                title={t.resetView}
+                aria-label={t.resetView}
               >
                 <RefreshIcon size={18} />
               </button>
@@ -137,7 +139,7 @@ export const BottomMenu = () => {
         </div>
         <div className={styles.legend}>
           <ParticleControl
-            name="Protons"
+            name={t.protons}
             count={bottomMenuProtons}
             color={CONFIG.protonColor}
             max={PARTICLE_LIMIT}
@@ -146,7 +148,7 @@ export const BottomMenu = () => {
             }
           />
           <ParticleControl
-            name="Neutrons"
+            name={t.neutrons}
             count={bottomMenuNeutrons}
             color={CONFIG.neutronColor}
             max={PARTICLE_LIMIT}
@@ -155,7 +157,7 @@ export const BottomMenu = () => {
             }
           />
           <ParticleControl
-            name="Electrons"
+            name={t.electrons}
             count={bottomMenuElectrons}
             color={CONFIG.electronColor}
             max={PARTICLE_LIMIT}

@@ -14,6 +14,7 @@ import type { ElementConfig } from "@/elementsData/types";
 import { useAppStore } from "@/store/appStore";
 import { useLongPress } from "@/hooks/useLongPress";
 import { SearchIcon } from "@/assets/icons/SearchIcon";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export interface SelectOption {
   value: string;
@@ -32,6 +33,7 @@ export const ElementSelect = ({
   setSelectedElement,
 }: ElementSelectProps) => {
   const { setParticleControlInputFocus } = useAppStore();
+  const { translateElementName, t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
@@ -64,8 +66,8 @@ export const ElementSelect = ({
   const nextElementPressProps = useLongPress(handleNextElement);
 
   const elementOptions: SelectOption[] = useMemo(
-    () => elements.map((el) => ({ value: el.name, label: el.name })),
-    [elements]
+    () => elements.map((el) => ({ value: el.name, label: translateElementName(el.name) })),
+    [elements, translateElementName]
   );
 
   const selectedOption = useMemo(
@@ -82,9 +84,10 @@ export const ElementSelect = ({
       .filter(
         (el) =>
           el.name.toLowerCase().includes(lowercasedFilter) ||
-          el.symbol.toLowerCase().includes(lowercasedFilter)
+          el.symbol.toLowerCase().includes(lowercasedFilter) ||
+          translateElementName(el.name).toLowerCase().includes(lowercasedFilter)
       )
-      .map((el) => ({ value: el.name, label: el.name }));
+      .map((el) => ({ value: el.name, label: translateElementName(el.name) }));
   }, [elementOptions, elements, searchTerm]);
 
   useEffect(() => {
@@ -94,7 +97,8 @@ export const ElementSelect = ({
     const filtered = elements.filter(
       (el) =>
         el.name.toLowerCase().includes(lowercasedFilter) ||
-        el.symbol.toLowerCase().includes(lowercasedFilter)
+        el.symbol.toLowerCase().includes(lowercasedFilter) ||
+        translateElementName(el.name).toLowerCase().includes(lowercasedFilter)
     );
 
     if (filtered.length > 0 && selectedElementName !== filtered[0].name) {
@@ -220,7 +224,7 @@ export const ElementSelect = ({
 
   return (
     <div className={styles.controlGroup}>
-      <label>Element:</label>
+      <label>{t.element}</label>
       <div className={styles.selectContainer} ref={selectRef}>
         <div
           className={`${styles.selectDisplay} ${isOpen ? styles.isOpen : ""}`}
@@ -252,7 +256,7 @@ export const ElementSelect = ({
                 <SearchIcon />
                 <input
                   type="text"
-                  placeholder="Search..."
+                  placeholder={t.search}
                   className={styles.searchInput}
                   value={searchTerm}
                   onChange={handleSearchChange}
@@ -273,7 +277,7 @@ export const ElementSelect = ({
                     </li>
                   ))
                 ) : (
-                  <li className={styles.noResults}>No results</li>
+                  <li className={styles.noResults}>{t.noResults}</li>
                 )}
               </ul>
             </div>,
@@ -284,14 +288,14 @@ export const ElementSelect = ({
         <button
           {...previousElementPressProps}
           className={styles.elementNavButton}
-          title="Previous element"
+          title={t.previousElement}
         >
           ▼
         </button>
         <button
           {...nextElementPressProps}
           className={styles.elementNavButton}
-          title="Next element"
+          title={t.nextElement}
         >
           ▲
         </button>

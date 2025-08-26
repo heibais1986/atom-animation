@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Atom animation",
-  description: "Interactive atom animation made in ThreeJS",
+  title: "原子动画 | Atom Animation",
+  description: "使用 ThreeJS 制作的交互式原子动画 | Interactive atom animation made in ThreeJS",
 };
 
 export default function RootLayout({
@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="zh" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
         <Layout>{children}</Layout>
       </body>
     </html>

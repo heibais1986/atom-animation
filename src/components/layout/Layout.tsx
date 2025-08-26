@@ -19,6 +19,8 @@ import { ElementModalSimple } from "@/components/views/atomModel/elementModalSim
 import { ElementModalMobile } from "../views/atomModel/elementModalMobile/ElementModalMobile";
 import { GitHubLink } from "./GithubLink/GithubLink";
 import { TopBarMobile } from "./TopBarMobile/TopBarMobile";
+import { LanguageToggle } from "../common/LanguageToggle/LanguageToggle";
+import { SimpleDebug } from "@/components/SimpleDebug";
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -106,6 +108,11 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       <div ref={githubLinkRef}>
         <GitHubLink />
       </div>
+      
+      <div className={styles.languageToggleWrapper}>
+        <LanguageToggle />
+      </div>
+      
 
       {showMobileTopBar && (
         <div ref={topBarRef}>

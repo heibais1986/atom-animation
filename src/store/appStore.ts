@@ -8,6 +8,7 @@ import {
   calculateElectronConfiguration,
 } from "../utils/elementUtils";
 import { ElementConfig } from "@/elementsData/types";
+import { Language, defaultLanguage } from "@/i18n";
 
 export interface StabilityInfo {
   type:
@@ -77,6 +78,7 @@ type AppState = {
   propertyScale: ScaleType;
   temperatureKelvin: number;
   resetViewCounter: number;
+  language: Language;
 };
 
 type AppActions = {
@@ -118,6 +120,7 @@ type AppActions = {
   setTemperature: (temp: number) => void;
   clearAllSelections: () => void;
   triggerViewReset: () => void;
+  setLanguage: (language: Language) => void;
 };
 
 const initialModalState: ModalState = {
@@ -149,6 +152,7 @@ const initialState: AppState = {
   temperatureKelvin: 298.15,
 
   resetViewCounter: 0,
+  language: defaultLanguage,
 };
 
 export const useAppStore = create<AppState & AppActions>((set, get) => ({
@@ -348,6 +352,8 @@ export const useAppStore = create<AppState & AppActions>((set, get) => ({
 
   setIsAtomModelInFocusView: (isAnimating) =>
     set({ isAtomModelInFocusView: isAnimating }),
+
+  setLanguage: (language) => set({ language }),
 }));
 
 const getStabilityInfo = (
