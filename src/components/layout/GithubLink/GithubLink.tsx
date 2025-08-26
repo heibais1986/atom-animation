@@ -8,7 +8,7 @@ import { GitHubIcon } from "@/assets/icons/GithubIcon";
 export const GitHubLink = () => {
   return (
     <a
-      href="https://github.com/matt765/atom-animation"
+      href="https://github.com/heibais1986/atom-animation"
       target="_blank"
       rel="noopener noreferrer"
       className={styles.githubLink}
