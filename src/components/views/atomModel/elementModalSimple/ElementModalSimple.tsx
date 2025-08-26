@@ -66,7 +66,7 @@ export const ElementModalSimple = ({
     if (element.isIsotope)
       return `${t.isotope}: ${translateElementName(element.name)}-${Math.round(element.atomicWeight)}`;
     if (element.charge !== 0) return `${t.ion}: ${translateElementName(element.name)}`;
-    return translateElementName(element.title);
+    return translateElementName(element.name);
   };
 
   const getDescription = () => {
