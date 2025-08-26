@@ -1,8 +1,9 @@
 import { Language } from './index';
 import { elementDescriptions } from './elementDescriptions';
+import { ExtendedElementConfig } from '../store/appStore';
 
 export const getElementDescription = (
-  element: any,
+  element: ExtendedElementConfig,
   language: Language,
   translateElementName: (name: string) => string
 ): string => {
@@ -13,7 +14,7 @@ export const getElementDescription = (
   }
 };
 
-const getChineseDescription = (element: any, translateElementName: (name: string) => string): string => {
+const getChineseDescription = (element: ExtendedElementConfig, translateElementName: (name: string) => string): string => {
   // 1. 特殊非原子粒子
   if (element.protons === 0) {
     if (
@@ -77,7 +78,7 @@ const getChineseDescription = (element: any, translateElementName: (name: string
   return elementDescriptions[element.name] || `${translateElementName(element.name)}是周期表中的一个化学元素。`;
 };
 
-const getEnglishDescription = (element: any, translateElementName: (name: string) => string): string => {
+const getEnglishDescription = (element: ExtendedElementConfig, translateElementName: (name: string) => string): string => {
   // 1. Special non-atomic particles
   if (element.protons === 0) {
     if (

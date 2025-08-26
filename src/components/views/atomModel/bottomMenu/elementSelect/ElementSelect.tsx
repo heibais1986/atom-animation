@@ -88,7 +88,7 @@ export const ElementSelect = ({
           translateElementName(el.name).toLowerCase().includes(lowercasedFilter)
       )
       .map((el) => ({ value: el.name, label: translateElementName(el.name) }));
-  }, [elementOptions, elements, searchTerm]);
+  }, [elementOptions, elements, searchTerm, translateElementName]);
 
   useEffect(() => {
     const lowercasedFilter = searchTerm.toLowerCase().trim();
@@ -104,7 +104,7 @@ export const ElementSelect = ({
     if (filtered.length > 0 && selectedElementName !== filtered[0].name) {
       setSelectedElement(filtered[0].name);
     }
-  }, [searchTerm, elements, setSelectedElement, selectedElementName]);
+  }, [searchTerm, elements, setSelectedElement, selectedElementName, translateElementName]);
 
   useEffect(() => {
     if (isOpen && selectRef.current) {

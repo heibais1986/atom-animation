@@ -20,7 +20,6 @@ import { ElementModalMobile } from "../views/atomModel/elementModalMobile/Elemen
 import { GitHubLink } from "./GithubLink/GithubLink";
 import { TopBarMobile } from "./TopBarMobile/TopBarMobile";
 import { LanguageToggle } from "../common/LanguageToggle/LanguageToggle";
-import { SimpleDebug } from "@/components/SimpleDebug";
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
